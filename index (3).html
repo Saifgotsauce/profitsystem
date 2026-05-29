@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Electrical Contractor's Profit System — Stop Guessing What to Charge</title>
+<meta name="description" content="The 12-tab workbook + playbook that tells solo and small electrical contractors their true hourly rate, what to bid, and whether a job actually made money. One-time $97. No subscription.">
+
+<!-- ============================================================
+     REPLACE every  href="#order"  and the JS CHECKOUT_URL below
+     with your real checkout link (Stripe / Gumroad / SamCart etc.)
+     The $19 order bump + $47 upsell live at checkout, not here.
+============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F1EADD;
+  --paper-2:#EAE1D0;
+  --card:#FBF7EE;
+  --ink:#19170F;
+  --ink-2:#4D463A;
+  --ink-3:#7C7363;
+  --line:#D8CDB8;
+  --line-2:#C9BCA1;
+  --copper:#BC4B1C;
+  --copper-d:#9C3A12;
+  --copper-soft:#F3E4D5;
+  --ledger:#2F5D3A;
+  --ledger-soft:#E4ECDF;
+  --warn:#B23C17;
+  --shadow:0 1px 0 rgba(255,255,255,.6), 0 18px 40px -22px rgba(40,30,15,.55);
+  --shadow-lg:0 2px 0 rgba(255,255,255,.5), 0 40px 80px -40px rgba(40,28,12,.6);
+  --r:14px;
+  --maxw:1120px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;min-width:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  overflow-x:hidden;width:100%;max-width:100%;
+  font-family:"IBM Plex Sans",sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+  font-size:17px;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* faint blueprint grid + grain atmosphere */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:40px 40px;
+  opacity:.16;
+  mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 75%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:20px;position:relative;z-index:1}
+section{position:relative;z-index:1}
+
+h1,h2,h3,h4{font-family:"Bricolage Grotesque",sans-serif;line-height:1.02;letter-spacing:-.018em;font-weight:800}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* labels */
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--copper-d);
+  display:inline-flex;align-items:center;gap:9px;
+}
+.eyebrow::before{content:"";width:26px;height:1.5px;background:var(--copper)}
+.snum{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);
+  letter-spacing:.18em;font-weight:500;
+}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:17px;
+  letter-spacing:-.01em;text-decoration:none;cursor:pointer;border:none;
+  padding:17px 28px;border-radius:11px;line-height:1;text-align:center;white-space:nowrap;
+  transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-primary{
+  background:var(--copper);color:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 12px 22px -10px rgba(156,58,18,.75);
+}
+.btn-primary:hover{background:var(--copper-d);transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 18px 30px -10px rgba(156,58,18,.8)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-2)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-sub{display:block;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;color:var(--ink-3);margin-top:11px;letter-spacing:.02em}
+.btn-arrow{font-size:20px;transition:transform .2s}
+.btn-primary:hover .btn-arrow{transform:translateX(3px)}
+
+/* ---------- TOP BAR ---------- */
+.topstrip{background:var(--ink);color:#EBE3D4;font-family:"IBM Plex Mono",monospace;
+  font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;text-align:center;
+  padding:9px 16px;position:relative;z-index:3}
+.topstrip b{color:var(--copper);font-weight:600}
+.topstrip span{opacity:.55;margin:0 9px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(241,234,221,.82);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;max-width:var(--maxw);margin-inline:auto}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+.brand .mk{width:34px;height:34px;border-radius:8px;background:var(--ink);display:grid;place-items:center;flex:none}
+.brand .mk svg{width:18px;height:18px}
+.brand .nm{font-family:"Bricolage Grotesque";font-weight:800;font-size:15px;line-height:1;letter-spacing:-.02em}
+.brand .nm small{display:block;font-family:"IBM Plex Mono";font-weight:500;font-size:9.5px;letter-spacing:.16em;color:var(--ink-3);text-transform:uppercase;margin-top:3px}
+.nav-cta{display:flex;align-items:center;gap:16px}
+.nav-price{font-family:"IBM Plex Mono";font-size:13px;color:var(--ink-2);font-weight:500}
+.nav-price b{color:var(--ink);font-weight:600}
+.nav-btn{padding:11px 18px;font-size:14px;border-radius:9px}
+.nav-btn .lg{display:inline}.nav-btn .sm{display:none}
+@media(max-width:680px){.nav-price{display:none}}
+@media(max-width:480px){
+  .nav-in{padding:11px 16px}
+  .brand .nm small{display:none}
+  .nav-btn{padding:10px 14px;font-size:13px}
+  .nav-btn .lg{display:none}.nav-btn .sm{display:inline}
+}
+
+/* ---------- HERO ---------- */
+.hero{padding:64px 0 50px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:42px;align-items:center}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
+.tag{font-family:"IBM Plex Mono";font-size:11.5px;font-weight:500;letter-spacing:.04em;
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink-2);
+  display:inline-flex;align-items:center;gap:6px}
+.tag svg{width:13px;height:13px;color:var(--ledger)}
+h1.hero-h{font-size:clamp(38px,8.8vw,68px);letter-spacing:-.03em}
+h1.hero-h em{font-style:normal;color:var(--copper);position:relative;white-space:nowrap}
+h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.13em;background:var(--copper);opacity:.28;border-radius:2px}
+.hero-sub{font-size:clamp(17px,2.4vw,20px);color:var(--ink-2);max-width:34ch;margin-top:22px}
+.hero-sub b{color:var(--ink);font-weight:600}
+.hero-cta{margin-top:30px}
+.hero-cta .btn{width:100%}
+.priceline{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.priceline .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:40px;letter-spacing:-.03em}
+.priceline .big sup{font-size:18px;top:-1.1em;color:var(--ink-3)}
+.priceline .was{font-family:"IBM Plex Mono";color:var(--ink-3);font-size:15px}
+.priceline .was s{opacity:.7}
+.priceline .once{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ledger);
+  border:1px solid var(--ledger);border-radius:6px;padding:5px 9px;font-weight:600}
+
+@media(min-width:900px){
+  .hero{padding:78px 0 64px}
+  .hero-grid{grid-template-columns:1.04fr 1fr;gap:54px}
+  .hero-sub{font-size:20px}
+  .hero-cta .btn{width:auto}
+}
+
+/* ---------- spreadsheet mockup ---------- */
+.frame{background:var(--card);border:1px solid var(--line-2);border-radius:var(--r);
+  box-shadow:var(--shadow-lg);overflow:hidden;position:relative}
+.frame.tilt{transform:none}
+@media(min-width:900px){.frame.tilt{transform:rotate(-1.1deg)}}
+.frame-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;background:#E9E0CF;border-bottom:1px solid var(--line-2)}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.r{background:#D98A6A}.dot.y{background:#D9B96A}.dot.g{background:#8FAE7C}
+.frame-title{margin-left:8px;font-family:"IBM Plex Mono";font-size:11.5px;color:var(--ink-3);font-weight:500}
+.tabs{display:flex;gap:2px;padding:7px 7px 0;background:#E3D9C6;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font-family:"IBM Plex Mono";font-size:10.5px;white-space:nowrap;padding:7px 11px;border-radius:6px 6px 0 0;
+  background:#D6CAB2;color:var(--ink-2);font-weight:500;border:1px solid transparent;border-bottom:none}
+.tab.on{background:var(--card);color:var(--copper-d);font-weight:600;border-color:var(--line-2)}
+.sheet{padding:0;background:var(--card)}
+.srow{display:grid;grid-template-columns:1.5fr 1fr 1fr;border-bottom:1px solid #ECE3D2;font-family:"IBM Plex Mono";font-size:12px}
+.srow>div{padding:9px 13px;border-right:1px solid #ECE3D2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow.head>div{background:var(--ink);color:#EFE7D6;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.srow .lab{color:var(--ink-2)}
+.srow .num{text-align:right;color:var(--ink)}
+.srow .pos{color:var(--ledger);font-weight:600}
+.srow .neg{color:var(--warn);font-weight:600}
+.srow.hl{background:var(--copper-soft)}
+.srow.hl .num{color:var(--copper-d);font-weight:600}
+.sheet-foot{padding:10px 13px;background:#EFE6D4;display:flex;justify-content:space-between;align-items:center;
+  font-family:"IBM Plex Mono";font-size:11px;color:var(--ink-3)}
+.sheet-foot b{color:var(--ink)}
+
+/* ---------- generic section ---------- */
+.sec{padding:74px 0}
+.sec-head{max-width:46ch;margin-bottom:42px}
+.sec-head h2{font-size:clamp(28px,5.2vw,44px);margin-top:14px}
+.sec-head p{color:var(--ink-2);font-size:18px;margin-top:16px}
+.divider{height:1px;background:var(--line);max-width:var(--maxw);margin-inline:auto}
+
+/* ---------- PROBLEM ---------- */
+.problem{background:var(--ink);color:#E9E1D2}
+.problem .eyebrow{color:#E89A6A}
+.problem .eyebrow::before{background:#E89A6A}
+.problem h2{color:#F3ECDD}
+.problem .snum{color:#857B69}
+.quote-stack{display:grid;gap:16px;margin-top:8px}
+@media(min-width:760px){.quote-stack{grid-template-columns:1fr 1fr}}
+.qcard{background:#221F16;border:1px solid #34301F;border-left:3px solid var(--copper);
+  border-radius:12px;padding:22px 22px}
+.qcard p{font-size:16px;color:#D8CFBE;line-height:1.55}
+.qcard p b{color:#F3ECDD}
+.qcard .who{display:block;margin-top:13px;font-family:"IBM Plex Mono";font-size:11.5px;color:#8A8068;letter-spacing:.04em}
+.gut{margin-top:38px;border-top:1px solid #34301F;padding-top:34px;display:grid;gap:26px}
+@media(min-width:760px){.gut{grid-template-columns:repeat(3,1fr)}}
+.gut .g .n{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(34px,6vw,46px);color:var(--copper);letter-spacing:-.03em;line-height:1}
+.gut .g p{color:#B3A992;font-size:14.5px;margin-top:8px;max-width:30ch}
+.problem .punch{margin-top:40px;font-family:"Bricolage Grotesque";font-weight:700;
+  font-size:clamp(21px,3.6vw,30px);color:#F3ECDD;letter-spacing:-.02em;max-width:24ch;line-height:1.12}
+.problem .punch em{font-style:normal;color:var(--copper)}
+
+/* ---------- ALL YOU NEED / ROI ---------- */
+.compare{display:grid;gap:16px;margin-top:8px}
+@media(min-width:820px){.compare{grid-template-columns:1fr 1fr 1fr;gap:18px}}
+.ccard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.ccard .ctop{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.ccard .cbig{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(30px,5vw,40px);letter-spacing:-.03em;margin:14px 0 4px;line-height:1}
+.ccard .cnote{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+.ccard.win{border-color:var(--copper);background:linear-gradient(180deg,#FBF1E8,#FBF7EE)}
+.ccard.win .cbig{color:var(--copper-d)}
+.ccard .vs{position:absolute;top:18px;right:20px;font-family:"IBM Plex Mono";font-size:11px;color:var(--line-2)}
+.ccard .strike{color:var(--ink-3);text-decoration:line-through;font-weight:600}
+.allneed{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.an-grid{display:grid;gap:14px;margin-top:34px}
+@media(min-width:760px){.an-grid{grid-template-columns:1fr 1fr}}
+.an{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px}
+.an .ic{flex:none;width:30px;height:30px;border-radius:8px;background:var(--copper-soft);display:grid;place-items:center;color:var(--copper-d);margin-top:1px}
+.an .ic svg{width:16px;height:16px}
+.an b{font-family:"Bricolage Grotesque";font-weight:700;font-size:16px;display:block;margin-bottom:3px}
+.an p{font-size:14.5px;color:var(--ink-2);line-height:1.5}
+
+/* ---------- REVEAL ---------- */
+.reveal-grid{display:grid;gap:40px;align-items:start}
+@media(min-width:920px){.reveal-grid{grid-template-columns:1fr .92fr;gap:54px}}
+.incl{display:grid;gap:13px;margin-top:6px}
+.incl li{list-style:none;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.incl li .tagn{flex:none;font-family:"IBM Plex Mono";font-size:11px;font-weight:600;color:#fff;background:var(--ink);
+  padding:4px 8px;border-radius:6px;letter-spacing:.04em;margin-top:1px}
+.incl li.bonus .tagn{background:var(--copper)}
+.incl li .it b{font-family:"Bricolage Grotesque";font-weight:700;font-size:16.5px;display:block}
+.incl li .it p{font-size:14px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+.incl .val{margin-left:auto;font-family:"IBM Plex Mono";font-size:12.5px;color:var(--ink-3);white-space:nowrap;align-self:center}
+.stackbox{margin-top:24px;background:var(--ink);color:#EDE5D5;border-radius:14px;padding:22px 24px}
+.stackbox .row{display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:14px;padding:6px 0;color:#C7BDA9}
+.stackbox .row.tot{border-top:1px dashed #413c29;margin-top:8px;padding-top:14px;color:#fff;font-weight:600;font-size:16px}
+.stackbox .row.tot b{color:var(--copper);font-family:"Bricolage Grotesque";font-weight:800;font-size:24px}
+.stackbox .row s{color:#857B69}
+
+/* book mockup */
+.book{position:relative;border-radius:6px 12px 12px 6px;overflow:hidden;
+  background:linear-gradient(135deg,#23201A 0%,#312C20 60%,#23201A 100%);
+  box-shadow:var(--shadow-lg),inset 14px 0 22px -14px rgba(0,0,0,.7);
+  aspect-ratio:3/4;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between;color:#EDE5D5;
+  border:1px solid #3a3527}
+.book::before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:linear-gradient(90deg,rgba(0,0,0,.45),transparent)}
+.book .bk-top{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--copper)}
+.book h3{font-size:clamp(24px,4.5vw,34px);color:#F4EDDE;letter-spacing:-.02em;line-height:1.04}
+.book .bk-foot{font-family:"IBM Plex Mono";font-size:11px;color:#998E78;border-top:1px solid #423c2c;padding-top:14px}
+.book .bk-rule{height:2px;width:46px;background:var(--copper);margin:14px 0}
+
+/* ---------- BREAKDOWN ---------- */
+.tabrow{display:grid;gap:22px}
+.tabitem{display:grid;gap:20px;align-items:center;padding:26px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+@media(min-width:780px){
+  .tabitem{grid-template-columns:1fr 1fr;gap:34px;padding:30px}
+  .tabitem:nth-child(even) .tab-mini{order:2}
+}
+.tab-txt .num{font-family:"IBM Plex Mono";font-size:12px;color:var(--copper-d);font-weight:600;letter-spacing:.12em}
+.tab-txt h3{font-size:clamp(21px,3.4vw,27px);margin:9px 0 10px}
+.tab-txt p{color:var(--ink-2);font-size:15.5px}
+.tab-txt .does{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.tab-txt .does span{font-family:"IBM Plex Mono";font-size:11px;background:var(--paper-2);border:1px solid var(--line);
+  border-radius:6px;padding:5px 9px;color:var(--ink-2)}
+.tab-mini{border:1px solid var(--line-2);border-radius:10px;overflow:hidden;box-shadow:0 12px 30px -20px rgba(40,30,15,.5)}
+.tab-mini .mhead{background:var(--ink);color:#EFE7D6;font-family:"IBM Plex Mono";font-size:10.5px;
+  letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;display:flex;justify-content:space-between}
+.tab-mini .mrow{display:grid;grid-template-columns:1.4fr 1fr;font-family:"IBM Plex Mono";font-size:12px;border-bottom:1px solid #ECE3D2;background:var(--card)}
+.tab-mini .mrow>div{padding:8px 12px}
+.tab-mini .mrow>div:last-child{text-align:right;border-left:1px solid #ECE3D2}
+.tab-mini .mrow .l{color:var(--ink-2)}
+.tab-mini .mrow.k{background:var(--copper-soft)}
+.tab-mini .mrow.k .v{color:var(--copper-d);font-weight:600}
+.tab-mini .pos{color:var(--ledger);font-weight:600}
+.tab-mini .neg{color:var(--warn);font-weight:600}
+
+/* ---------- WHO ---------- */
+.who-grid{display:grid;gap:18px}
+@media(min-width:760px){.who-grid{grid-template-columns:1fr 1fr}}
+.wcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
+.wcard.yes{border-top:4px solid var(--ledger)}
+.wcard.no{border-top:4px solid var(--ink-3)}
+.wcard h3{font-size:21px;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.wcard h3 .b{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;flex:none}
+.wcard.yes .b{background:var(--ledger-soft);color:var(--ledger)}
+.wcard.no .b{background:var(--paper-2);color:var(--ink-3)}
+.wcard h3 .b svg{width:15px;height:15px}
+.wcard ul{list-style:none;display:grid;gap:12px}
+.wcard li{display:flex;gap:11px;font-size:15px;color:var(--ink-2);line-height:1.45}
+.wcard li svg{flex:none;width:17px;height:17px;margin-top:3px}
+.wcard.yes li svg{color:var(--ledger)}
+.wcard.no li svg{color:var(--ink-3)}
+
+/* ---------- GUARANTEE ---------- */
+.guar{background:var(--ink);color:#E9E1D2}
+.guar-in{display:grid;gap:36px;align-items:center}
+@media(min-width:820px){.guar-in{grid-template-columns:200px 1fr;gap:48px}}
+.stamp{width:190px;height:190px;margin-inline:auto;border-radius:50%;border:3px solid var(--copper);
+  display:grid;place-items:center;text-align:center;position:relative;transform:rotate(-9deg);
+  box-shadow:0 0 0 6px rgba(188,75,28,.12)}
+.stamp::before{content:"";position:absolute;inset:9px;border:1.5px dashed rgba(188,75,28,.55);border-radius:50%}
+.stamp .s-in{padding:14px}
+.stamp .d{font-family:"Bricolage Grotesque";font-weight:800;font-size:50px;color:var(--copper);line-height:.85;letter-spacing:-.04em}
+.stamp .t{font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#D9B59E;margin-top:8px}
+.guar .eyebrow{color:#E89A6A}.guar .eyebrow::before{background:#E89A6A}
+.guar h2{color:#F3ECDD;font-size:clamp(26px,4.6vw,38px)}
+.guar p{color:#C7BDA9;font-size:17px;margin-top:16px;max-width:54ch}
+.guar p b{color:#F3ECDD}
+.guar .sig{margin-top:18px;font-family:"IBM Plex Mono";font-size:13px;color:#9A9079}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid;gap:0;max-width:780px;margin-inline:auto;border-top:1px solid var(--line)}
+.fitem{border-bottom:1px solid var(--line)}
+.fq{width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  display:flex;justify-content:space-between;gap:18px;align-items:center;padding:22px 4px;
+  font-family:"Bricolage Grotesque";font-weight:700;font-size:18px;color:var(--ink);letter-spacing:-.01em}
+.fq .pm{flex:none;width:26px;height:26px;border:1.5px solid var(--line-2);border-radius:7px;
+  display:grid;place-items:center;color:var(--copper-d);transition:.25s;position:relative}
+.fq .pm::before,.fq .pm::after{content:"";position:absolute;background:var(--copper-d);border-radius:2px}
+.fq .pm::before{width:11px;height:2px}
+.fq .pm::after{width:2px;height:11px;transition:.25s}
+.fitem.open .pm{background:var(--copper);border-color:var(--copper)}
+.fitem.open .pm::before,.fitem.open .pm::after{background:#fff}
+.fitem.open .pm::after{transform:scaleY(0)}
+.fa{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.fa-in{padding:0 4px 24px;color:var(--ink-2);font-size:15.5px;line-height:1.6;max-width:64ch}
+.fa-in b{color:var(--ink)}
+
+/* ---------- FINAL CTA ---------- */
+.final{background:var(--paper-2);border-top:1px solid var(--line)}
+.final-card{background:var(--card);border:1px solid var(--line-2);border-radius:18px;
+  box-shadow:var(--shadow-lg);overflow:hidden;max-width:760px;margin-inline:auto}
+.final-top{background:var(--ink);color:#EDE5D5;padding:28px 30px;text-align:center}
+.final-top .eyebrow{color:#E89A6A;justify-content:center}.final-top .eyebrow::before{background:#E89A6A}
+.final-top h2{color:#F4EDDE;font-size:clamp(26px,5vw,38px);margin-top:14px}
+.final-body{padding:30px}
+.final-list{display:grid;gap:10px;margin-bottom:8px}
+.final-list .fl{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+  padding:11px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.final-list .fl .nm{display:flex;gap:10px;align-items:baseline}
+.final-list .fl .nm svg{width:15px;height:15px;color:var(--ledger);flex:none;transform:translateY(2px)}
+.final-list .fl .nm b{font-weight:600}
+.final-list .fl .v{font-family:"IBM Plex Mono";font-size:13px;color:var(--ink-3);white-space:nowrap}
+.final-list .fl.t{border-bottom:none;padding-top:16px}
+.final-list .fl.t .tt{font-family:"Bricolage Grotesque";font-weight:800;font-size:18px}
+.final-price{text-align:center;margin:22px 0 8px}
+.final-price .x{font-family:"IBM Plex Mono";color:var(--ink-3);font-size:14px}
+.final-price .x s{margin-right:8px}
+.final-price .p{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(46px,9vw,64px);letter-spacing:-.04em;line-height:1;margin-top:4px}
+.final-price .p sup{font-size:24px;top:-1.2em;color:var(--ink-3)}
+.final-price .once{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ledger);font-weight:600;display:block;margin-top:8px}
+.final .btn{width:100%;font-size:19px;padding:20px}
+.trust-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:18px}
+.trust-row span{font-family:"IBM Plex Mono";font-size:12px;color:var(--ink-3);display:inline-flex;align-items:center;gap:6px}
+.trust-row svg{width:13px;height:13px;color:var(--ledger)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--ink);color:#9A9079;padding:48px 0 130px;font-size:13px}
+@media(min-width:760px){footer{padding-bottom:56px}}
+.foot-in{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start}
+.foot-in .brand .nm{color:#EDE5D5}
+footer p{max-width:52ch;line-height:1.55;margin-top:14px;color:#857B69;font-size:12px}
+footer a{color:#B3A992;text-decoration:none}
+footer a:hover{color:var(--copper)}
+.foot-links{display:flex;gap:18px;font-family:"IBM Plex Mono";font-size:12px}
+
+/* ---------- STICKY MOBILE CTA ---------- */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(25,23,15,.96);
+  backdrop-filter:blur(8px);border-top:1px solid #3a3527;padding:11px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;transform:translateY(120%);transition:transform .3s ease}
+.sticky.show{transform:translateY(0)}
+.sticky .sp{color:#EDE5D5;font-family:"IBM Plex Mono";font-size:12px;line-height:1.3}
+.sticky .sp b{font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;color:#fff;display:block}
+.sticky .sp em{font-style:normal;color:var(--copper)}
+.sticky .btn{padding:13px 18px;font-size:15px;white-space:nowrap}
+@media(min-width:760px){.sticky{display:none}}
+
+/* reveal-on-scroll */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="topstrip">
+  Built with electricians, not MBAs <span>/</span> Works in <b>Excel &amp; Google Sheets</b> <span>/</span> Instant download <span>/</span> <b>60-day</b> money-back
+</div>
+
+<nav>
+  <div class="nav-in">
+    <a href="#top" class="brand">
+      <span class="mk"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 13h6l-1 9 9-11h-6l1-9Z" fill="#BC4B1C"/></svg></span>
+      <span class="nm">THE PROFIT SYSTEM<small>For Electrical Contractors</small></span>
+    </a>
+    <div class="nav-cta">
+      <span class="nav-price">One-time <b>$97</b></span>
+      <a href="#order" class="btn btn-primary nav-btn"><span class="lg">Get the System</span><span class="sm">Get it →</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">For solo &amp; 2–5 man electrical shops</span>
+        <h1 class="hero-h">You're great with a panel.<br>You're <em>guessing</em> on the price.</h1>
+        <div class="tag-row">
+          <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> No subscription</span>
+          <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Your numbers, your trade</span>
+          <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> 20-min setup</span>
+        </div>
+        <p class="hero-sub">A done-for-you workbook + playbook that hands you your <b>true hourly rate</b>, tells you exactly <b>what to bid</b>, and shows you whether last week's job actually <b>made money</b> — or just kept you busy.</p>
+
+        <div class="priceline">
+          <span class="big"><sup>$</sup>97</span>
+          <span class="was"><s>$291 value</s></span>
+          <span class="once">Pay once · own it forever</span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#order" class="btn btn-primary">Get the Profit System <span class="btn-arrow">→</span></a>
+          <span class="btn-sub">Instant download · Excel + Google Sheets · 60-day money-back guarantee</span>
+        </div>
+      </div>
+
+      <!-- workbook mockup -->
+      <div class="rv">
+        <div class="frame tilt">
+          <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="frame-title">Profit-System.xlsx — Dashboard</span></div>
+          <div class="tabs">
+            <span class="tab on">Dashboard</span><span class="tab">True Rate</span><span class="tab">Bid Builder</span><span class="tab">Job Cost</span><span class="tab">P&amp;L</span><span class="tab">+8</span>
+          </div>
+          <div class="sheet">
+            <div class="srow head"><div>This Month</div><div class="num">Target</div><div class="num">Actual</div></div>
+            <div class="srow"><div class="lab">Revenue</div><div class="num">$42,000</div><div class="num">$44,820</div></div>
+            <div class="srow"><div class="lab">True labor cost</div><div class="num">$18,900</div><div class="num">$19,140</div></div>
+            <div class="srow"><div class="lab">Materials + markup</div><div class="num">$9,800</div><div class="num">$10,260</div></div>
+            <div class="srow hl"><div class="lab">Net profit</div><div class="num">$6,300</div><div class="num pos">$7,140</div></div>
+            <div class="srow"><div class="lab">Margin</div><div class="num">15.0%</div><div class="num pos">15.9%</div></div>
+          </div>
+          <div class="sheet-foot"><span>True hourly rate: <b>$96.40/hr</b></span><span>Break-even: <b>$33,210</b></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== PROBLEM ===================== -->
+<section class="sec problem">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="snum">01 / The real problem</span>
+      <span class="eyebrow" style="margin-top:10px">"Busy but broke"</span>
+      <h2>The work is steady. So why is the account always empty?</h2>
+    </div>
+
+    <div class="quote-stack rv">
+      <div class="qcard"><p>"I'm booked solid eight weeks out and I <b>still</b> can't make payroll without sweating it. Where's the money going?"</p><span class="who">— what half this trade says out loud</span></div>
+      <div class="qcard"><p>"Some kid with a van and a Sawzall is bidding the same job at half my number. I'm not racing him <b>to the bottom</b>."</p><span class="who">— on the lowballers</span></div>
+      <div class="qcard"><p>"I pay my journeyman $35 an hour, so I figured $35 was my cost. Turns out he actually <b>costs me $46</b> before I make a dime."</p><span class="who">— on labor burden nobody taught you</span></div>
+      <div class="qcard"><p>"Add it up wrong on a $6K job and there goes the whole month. That's the <b>Chapter 7 quick road</b> right there."</p><span class="who">— on what one bad bid does</span></div>
+    </div>
+
+    <div class="gut rv">
+      <div class="g"><div class="n">35–60%</div><p>How much contractors underbid by when they price off direct cost and ignore burden.</p></div>
+      <div class="g"><div class="n">~1,300</div><p>Actual billable hours in a year — not 2,080. Spread your overhead over the wrong number and every bid is short.</p></div>
+      <div class="g"><div class="n">3–8%</div><p>The net margin most small shops survive on. One mispriced job erases it.</p></div>
+    </div>
+
+    <p class="punch rv">It was never the wiring. It was the <em>math behind the wiring</em> — and nobody handed you the sheet that does it.</p>
+  </div>
+</section>
+
+<!-- ===================== PRODUCT REVEAL ===================== -->
+<section class="sec" id="inside">
+  <div class="wrap">
+    <div class="reveal-grid">
+      <div>
+        <div class="sec-head rv" style="margin-bottom:26px">
+          <span class="snum">02 / What you actually get</span>
+          <span class="eyebrow" style="margin-top:10px">The Profit System</span>
+          <h2>One workbook that knows your numbers cold.</h2>
+          <p>Built in plain Excel and Google Sheets. You type in <b>your</b> wages, <b>your</b> overhead, <b>your</b> state's comp and taxes — it does every calculation that's been quietly eating your margin.</p>
+        </div>
+
+        <ul class="incl rv">
+          <li><span class="tagn">CORE</span><div class="it"><b>The 12-Tab Profit Workbook</b><p>Bidding, job costing, labor burden, true hourly rate, live job tracking, P&amp;L and break-even — all wired together.</p></div><span class="val">$197</span></li>
+          <li class="bonus"><span class="tagn">+1</span><div class="it"><b>The 40-Page Playbook (PDF)</b><p>The "why" behind every tab, in contractor English. Read it once, price right forever.</p></div><span class="val">$39</span></li>
+          <li class="bonus"><span class="tagn">+2</span><div class="it"><b>Quick-Start Checklist</b><p>From download to your true hourly rate in about 20 minutes. No spreadsheet skills needed.</p></div><span class="val">$19</span></li>
+          <li class="bonus"><span class="tagn">+3</span><div class="it"><b>Residential vs. Commercial Cheat Sheet</b><p>Different burden, markup and margin targets for each — so you stop blending two businesses into one bad number.</p></div><span class="val">$36</span></li>
+        </ul>
+
+        <div class="stackbox rv">
+          <div class="row"><span>Total real value</span><span><s>$291</s></span></div>
+          <div class="row tot"><span>Your price today</span><span><b>$97</b> once</span></div>
+        </div>
+
+        <div class="hero-cta rv" style="margin-top:22px">
+          <a href="#order" class="btn btn-primary">Get everything for $97 <span class="btn-arrow">→</span></a>
+          <span class="btn-sub">Instant download · keep the files even if you refund</span>
+        </div>
+      </div>
+
+      <!-- book mockup -->
+      <div class="rv">
+        <div class="book">
+          <div>
+            <div class="bk-top">The Playbook · 40 pages</div>
+            <div class="bk-rule"></div>
+            <h3>The Electrical Contractor's Profit System</h3>
+          </div>
+          <div class="bk-foot">Know your rate. Price the job. Keep the profit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== ALL YOU NEED + ROI ===================== -->
+<section class="sec allneed" id="why">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="snum">03 / Why this is all you need</span>
+      <span class="eyebrow" style="margin-top:10px">No app to learn. No monthly bill.</span>
+      <h2>You don't have a software problem. You have a numbers problem.</h2>
+      <p>Knowify and TurboBid are powerful — and built for shops with an office manager and time to learn them. You don't need another login at $99–$149 a month. You need the math, done once, in a tool you already own.</p>
+    </div>
+
+    <div class="an-grid rv">
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It runs where you already work</b><p>Opens in Excel or free Google Sheets. Nothing to install, no seats, no IT.</p></div></div>
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It answers the only 3 questions that matter</b><p>What does an hour really cost me? What do I bid? Did the job make money?</p></div></div>
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It fits a one-truck shop, not a 50-man GC</b><p>No bloated modules you'll never touch. Just the tabs that move your bank balance.</p></div></div>
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>You own it — they rent it to you</b><p>Pay $97 once. No card on file. No "your plan is expiring" emails forever.</p></div></div>
+    </div>
+
+    <div class="sec-head rv" style="margin:54px 0 28px">
+      <span class="snum">04 / The math on $97</span>
+      <h2 style="margin-top:14px">Three ways this pays for itself before the weekend.</h2>
+    </div>
+
+    <div class="compare rv">
+      <div class="ccard"><span class="vs">vs. software</span><div class="ctop">Knowify / TurboBid</div><div class="cbig"><span class="strike">$1,788</span></div><div class="cnote">A year of $149/mo software you'll half-use. The Profit System is <b>$97, once</b> — that's the first 6 days of their subscription.</div></div>
+      <div class="ccard"><span class="vs">vs. one bad bid</span><div class="ctop">A single underbid job</div><div class="cbig">$2,100</div><div class="cnote">Underbid a routine $6K job by 35% and that's gone. The system exists to stop exactly that — <b>once</b>.</div></div>
+      <div class="ccard win"><span class="vs">vs. one mispriced hour</span><div class="ctop">Your true hourly rate</div><div class="cbig">+$11/hr</div><div class="cnote">Find you've been billing $11/hr under true cost across ~1,300 hours? That's <b>$14,300 a year</b> you were leaving on the bench.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DETAILED BREAKDOWN ===================== -->
+<section class="sec" id="tabs">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="snum">05 / Inside the 12 tabs</span>
+      <span class="eyebrow" style="margin-top:10px">A guided tour</span>
+      <h2>Every tab does one job — so you don't have to.</h2>
+      <p>Here's what's behind each tab and what it spits out. Type your numbers once; they flow everywhere.</p>
+    </div>
+
+    <div class="tabrow">
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>02 · True Hourly Rate</span><span>$ / hr</span></div>
+          <div class="mrow"><div class="l">Base wage</div><div class="v">$35.00</div></div>
+          <div class="mrow"><div class="l">+ Burden (taxes, comp, benefits)</div><div class="v">$11.20</div></div>
+          <div class="mrow"><div class="l">÷ Billable hours (1,300)</div><div class="v">×</div></div>
+          <div class="mrow k"><div class="l">True cost / billable hr</div><div class="v">$96.40</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 02</div><h3>True Hourly Rate</h3><p>The number that fixes everything else. Turns base wage into what an hour actually costs once burden and real billable hours are in — the figure most shops have never calculated.</p><div class="does"><span>labor burden</span><span>billable-hour reality</span><span>overhead recovery</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>04 · Bid Builder</span><span>quote</span></div>
+          <div class="mrow"><div class="l">Labor (hrs × true rate)</div><div class="v">$3,856</div></div>
+          <div class="mrow"><div class="l">Materials + markup 22%</div><div class="v">$1,830</div></div>
+          <div class="mrow"><div class="l">Overhead allocation</div><div class="v">$642</div></div>
+          <div class="mrow k"><div class="l">Bid price (28% margin)</div><div class="v">$8,790</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TABS 04–05</div><h3>Bid Builder — Residential &amp; Commercial</h3><p>Plug in hours and materials; it builds a defensible price at the margin <em>you</em> set. Separate builders for resi and commercial because the burden and markup aren't the same.</p><div class="does"><span>resi + commercial</span><span>set your margin</span><span>line-item ready</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>07 · Job Costing</span><span>est vs actual</span></div>
+          <div class="mrow"><div class="l">Estimated cost</div><div class="v">$6,328</div></div>
+          <div class="mrow"><div class="l">Actual cost</div><div class="v">$6,910</div></div>
+          <div class="mrow"><div class="l">Variance</div><div class="v neg">–$582</div></div>
+          <div class="mrow k"><div class="l">Real margin earned</div><div class="v">19.4%</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 07</div><h3>Job Costing — Estimate vs. Actual</h3><p>After the job, see exactly where you bled — labor, materials, or change orders you ate. The feedback loop that makes your <em>next</em> bid sharper.</p><div class="does"><span>variance tracking</span><span>change-order capture</span><span>real margin</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>08 · Job Tracker</span><span>active</span></div>
+          <div class="mrow"><div class="l">Westwood remodel</div><div class="v pos">on track</div></div>
+          <div class="mrow"><div class="l">Mercer panel upgrade</div><div class="v neg">over hrs</div></div>
+          <div class="mrow"><div class="l">Hilltop new const.</div><div class="v pos">on track</div></div>
+          <div class="mrow k"><div class="l">Open job profit (proj.)</div><div class="v">$11,240</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 08</div><h3>Live Job Tracker</h3><p>Every active job on one screen — hours logged vs. bid, projected profit, what's slipping. Catch a job going sideways while you can still fix it.</p><div class="does"><span>hours vs bid</span><span>projected profit</span><span>red-flag alerts</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>09 · Break-Even</span><span>monthly</span></div>
+          <div class="mrow"><div class="l">Fixed overhead / mo</div><div class="v">$9,180</div></div>
+          <div class="mrow"><div class="l">Avg gross margin</div><div class="v">31%</div></div>
+          <div class="mrow k"><div class="l">Revenue to break even</div><div class="v">$29,610</div></div>
+          <div class="mrow"><div class="l">Billable hrs needed</div><div class="v">307</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 09</div><h3>Break-Even Calculator</h3><p>The number you have to hit before you've earned a dollar. Know it cold and you'll never panic-bid a January job again.</p><div class="does"><span>fixed-cost coverage</span><span>hours-to-survive</span><span>price floor</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>10 · P&amp;L</span><span>this month</span></div>
+          <div class="mrow"><div class="l">Revenue</div><div class="v">$44,820</div></div>
+          <div class="mrow"><div class="l">Cost of work</div><div class="v">$31,460</div></div>
+          <div class="mrow"><div class="l">Overhead</div><div class="v">$6,220</div></div>
+          <div class="mrow k"><div class="l">Net profit</div><div class="v pos">$7,140</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TABS 01 · 10 · 11</div><h3>Dashboard, P&amp;L &amp; Overhead</h3><p>The whole shop at a glance: a plain-English profit-and-loss, your fixed and overhead costs itemized, and a dashboard that turns it all into the few numbers you actually steer by.</p><div class="does"><span>monthly P&amp;L</span><span>overhead detail</span><span>one-screen dashboard</span></div></div>
+      </div>
+
+    </div>
+
+    <div class="hero-cta rv" style="margin-top:34px;text-align:center">
+      <a href="#order" class="btn btn-primary">Put these tabs to work — $97 <span class="btn-arrow">→</span></a>
+      <span class="btn-sub">Plus Materials &amp; Markup, Quick-Quote cheat sheet, and the Playbook</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===================== WHO IT'S FOR ===================== -->
+<section class="sec" id="who">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="snum">06 / Honest fit check</span>
+      <span class="eyebrow" style="margin-top:10px">Let's not waste each other's time</span>
+      <h2>This isn't for everybody. Here's the line.</h2>
+    </div>
+    <div class="who-grid">
+      <div class="wcard yes rv">
+        <h3><span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span> It's built for you if…</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>You run a solo or 2–5 person electrical shop doing roughly $150K–$1.5M.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>You're pricing off gut feel, a beat-up spreadsheet, or "what the last guy charged."</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>You're busy but the bank account doesn't show it.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>You want the answer, not another app to babysit.</li>
+        </ul>
+      </div>
+      <div class="wcard no rv">
+        <h3><span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg></span> Skip it if…</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>You already run full job-costing software and love it.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>You've got an office manager and a controller on payroll.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>You want a magic button that bids for you with zero input.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>You're honestly fine with where your margins are.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GUARANTEE ===================== -->
+<section class="sec guar" id="guarantee">
+  <div class="wrap">
+    <div class="guar-in">
+      <div class="rv">
+        <div class="stamp"><div class="s-in"><div class="d">60</div><div class="t">Day · Guarantee</div></div></div>
+      </div>
+      <div class="rv">
+        <span class="snum">07 / The guarantee</span>
+        <span class="eyebrow" style="margin-top:10px">All the risk is on me</span>
+        <h2>Run your next 3 bids through it. If it doesn't change a number, you owe nothing.</h2>
+        <p>Download it, build your true hourly rate, and price your next few jobs with it. If in <b>60 days</b> it hasn't shown you money you were leaving on the table — or you just decide it's not for you — email me for a <b>full refund, no questions, no hoops.</b></p>
+        <p><b>And keep the files.</b> I'd rather you walk away with the workbook than feel boxed in. Fair is fair.</p>
+        <div class="sig">— The team behind The Profit System</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv" style="margin-inline:auto;text-align:center;max-width:40ch">
+      <span class="snum">08 / Straight answers</span>
+      <h2 style="margin-top:14px">The questions you're already asking.</h2>
+    </div>
+    <div class="faq rv">
+      <div class="fitem"><button class="fq">Is this a monthly subscription? <span class="pm"></span></button><div class="fa"><div class="fa-in">No. It's <b>$97 one time.</b> Download it, it's yours forever — including future updates. No card kept on file, no auto-renewal, no "your trial is ending" emails.</div></div></div>
+
+      <div class="fitem"><button class="fq">Do I need Excel? I mostly use my phone. <span class="pm"></span></button><div class="fa"><div class="fa-in">It works in <b>Excel and free Google Sheets.</b> If you've got a Gmail address, you can run it free in your browser or the Sheets app — phone, tablet, or the laptop in the truck.</div></div></div>
+
+      <div class="fitem"><button class="fq">I'm not a spreadsheet guy. Will I actually be able to use it? <span class="pm"></span></button><div class="fa"><div class="fa-in">That's exactly who it's built for. You type your numbers into the <b>highlighted cells only</b> — every formula is already wired. The Quick-Start Checklist walks you to your true hourly rate in about 20 minutes.</div></div></div>
+
+      <div class="fitem"><button class="fq">How is this different from Knowify or TurboBid? <span class="pm"></span></button><div class="fa"><div class="fa-in">Those are full software platforms at <b>$99–$149 a month</b> built for bigger shops with someone to run them. This is the <b>core math</b> — true rate, bidding, job costing, P&amp;L — with no learning curve and no monthly bill. Different tool for a one- or two-truck shop.</div></div></div>
+
+      <div class="fitem"><button class="fq">Residential, commercial, or both? <span class="pm"></span></button><div class="fa"><div class="fa-in">Both. There are separate bid builders for residential and commercial, plus a cheat sheet with different burden, markup, and margin targets for each — so you stop running two different businesses off one blended number.</div></div></div>
+
+      <div class="fitem"><button class="fq">I've been doing this 20 years. What's this going to tell me I don't know? <span class="pm"></span></button><div class="fa"><div class="fa-in">Maybe nothing — or maybe that you've been off by 5 points on burden the whole time, which quietly underbids <b>every</b> job. The workbook just makes your numbers exact instead of "close enough." Most veterans are surprised by their real billable-hour count.</div></div></div>
+
+      <div class="fitem"><button class="fq">How long until it's actually set up? <span class="pm"></span></button><div class="fa"><div class="fa-in">Plan on <b>about 20–30 minutes</b> with a recent pay stub and your insurance numbers handy. After that, each new bid takes a couple of minutes.</div></div></div>
+
+      <div class="fitem"><button class="fq">Will it work for my state? I'm in Canada. <span class="pm"></span></button><div class="fa"><div class="fa-in">Yes. Nothing is hard-coded — <b>you enter your own</b> wages, tax rates, workers' comp, and overhead, so it works in any US state and across Canada. The math is universal; the numbers are yours.</div></div></div>
+
+      <div class="fitem"><button class="fq">What if I buy it and it's not for me? <span class="pm"></span></button><div class="fa"><div class="fa-in"><b>60-day, no-questions money-back guarantee</b> — and you keep the files either way. The only way you lose is by leaving your pricing the way it is now.</div></div></div>
+
+      <div class="fitem"><button class="fq">Do I get updates and support? <span class="pm"></span></button><div class="fa"><div class="fa-in">Future updates to the workbook are <b>free for life.</b> Setup questions? Reply to your receipt email — a real person answers. <em>(Add your support email here.)</em></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="sec final" id="order">
+  <div class="wrap">
+    <div class="final-card rv">
+      <div class="final-top">
+        <span class="eyebrow">09 / Last thing</span>
+        <h2>Stop bidding blind. Start keeping what you earn.</h2>
+      </div>
+      <div class="final-body">
+        <div class="final-list">
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><b>The 12-Tab Profit Workbook</b></span><span class="v">$197</span></div>
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>The 40-Page Profit Playbook (PDF)</span><span class="v">$39</span></div>
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>20-Minute Quick-Start Checklist</span><span class="v">$19</span></div>
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Residential vs. Commercial Cheat Sheet</span><span class="v">$36</span></div>
+          <div class="fl t"><span class="nm"><span class="tt">Total value</span></span><span class="v" style="font-size:15px"><s>$291</s></span></div>
+        </div>
+
+        <div class="final-price">
+          <span class="x"><s>$291</s> today just</span>
+          <div class="p"><sup>$</sup>97</div>
+          <span class="once">One-time payment · yours forever · no subscription</span>
+        </div>
+
+        <a href="#order" class="btn btn-primary">Get Instant Access — $97 <span class="btn-arrow">→</span></a>
+
+        <div class="trust-row">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Instant download</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Excel + Google Sheets</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> 60-day guarantee</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Keep the files</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>
+      <a href="#top" class="brand">
+        <span class="mk"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 13h6l-1 9 9-11h-6l1-9Z" fill="#BC4B1C"/></svg></span>
+        <span class="nm" style="color:#EDE5D5">THE PROFIT SYSTEM<small>For Electrical Contractors</small></span>
+      </a>
+      <p>For US &amp; Canadian electrical contractors. This is a planning and estimating tool, not accounting, tax, or legal advice — figures shown are illustrative. Results depend on the numbers you put in and the decisions you make.</p>
+    </div>
+    <div class="foot-links">
+      <a href="#faq">FAQ</a>
+      <a href="#guarantee">Guarantee</a>
+      <a href="#order">Get it</a>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky mobile CTA -->
+<div class="sticky" id="sticky">
+  <div class="sp"><span>The Profit System</span><b><em>$97</em> · once</b></div>
+  <a href="#order" class="btn btn-primary">Get it →</a>
+</div>
+
+<script>
+// ---- Set your real checkout link here; it rewrites every CTA on load ----
+/* ▼▼ EDIT THIS ONE LINE: paste your Payhip product/checkout link between the quotes ▼▼ */
+const CHECKOUT_URL = "https://payhip.com/b/XXXXX"; // <-- your $97 product link from Payhip
+/* ▲▲ Every "Get the System" button on this page now sends buyers to Payhip ▲▲ */
+if(CHECKOUT_URL){document.querySelectorAll('a[href="#order"]').forEach(a=>{if(!a.closest('footer')&&!a.classList.contains('nav-btn')||true){a.setAttribute('href',CHECKOUT_URL);}});}
+
+// FAQ accordion
+document.querySelectorAll('.fq').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const it=b.parentElement, fa=b.nextElementSibling, open=it.classList.contains('open');
+    document.querySelectorAll('.fitem.open').forEach(o=>{o.classList.remove('open');o.querySelector('.fa').style.maxHeight=null;});
+    if(!open){it.classList.add('open');fa.style.maxHeight=fa.scrollHeight+'px';}
+  });
+});
+
+// reveal on scroll
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// sticky CTA after hero
+const hero=document.querySelector('.hero'), sticky=document.getElementById('sticky');
+const so=new IntersectionObserver((es)=>{es.forEach(e=>{sticky.classList.toggle('show',!e.isIntersecting&&window.scrollY>500);})},{threshold:0});
+so.observe(hero);
+</script>
+</body>
+</html>
