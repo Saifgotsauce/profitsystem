@@ -152,6 +152,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(241,234,221,.82);
 .brand .nm small{display:block;font-family:"IBM Plex Mono";font-weight:500;font-size:9.5px;letter-spacing:.16em;color:var(--ink-3);text-transform:uppercase;margin-top:3px}
 .nav-cta{display:flex;align-items:center;gap:16px}
 .nav-price{font-family:"IBM Plex Mono";font-size:13px;color:var(--ink-2);font-weight:500}
+.nav-price s{color:var(--ink-3);opacity:.7;margin-right:3px}
 .nav-price b{color:var(--ink);font-weight:600}
 .nav-btn{padding:11px 18px;font-size:14px;border-radius:9px}
 .nav-btn .lg{display:inline}.nav-btn .sm{display:none}
@@ -179,6 +180,21 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 .hero-cta{margin-top:30px}
 .hero-cta .btn{width:100%}
 .priceline{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.priceline .was-price{font-family:"Bricolage Grotesque";font-weight:800;font-size:34px;letter-spacing:-.03em;color:var(--ink-3)}
+.priceline .was-price s{text-decoration-thickness:3px;text-decoration-color:var(--copper)}
+.launch-note{margin-top:12px;font-family:"IBM Plex Mono";font-size:13.5px;color:var(--ink-2);max-width:42ch;line-height:1.4}
+.launch-note b{color:var(--copper-d)}
+/* countdown */
+.countdown{margin-top:18px;display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;
+  background:var(--ink);border-radius:12px;padding:13px 18px;box-shadow:0 14px 30px -20px rgba(40,28,12,.6)}
+.countdown .cd-lab{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:#E89A6A;font-weight:600;line-height:1.3;max-width:15ch}
+.countdown .cd-clock{display:flex;gap:8px}
+.countdown .cd-unit{display:flex;flex-direction:column;align-items:center;min-width:48px}
+.countdown .cd-unit b{font-family:"Bricolage Grotesque";font-weight:800;font-size:28px;color:#F4EDDE;line-height:1;
+  font-variant-numeric:tabular-nums}
+.countdown .cd-unit span{font-family:"IBM Plex Mono";font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a9079;margin-top:4px}
+.countdown .cd-sep{font-family:"Bricolage Grotesque";font-weight:800;font-size:24px;color:#4d463a;align-self:flex-start;margin-top:1px}
 .priceline .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:40px;letter-spacing:-.03em}
 .priceline .big sup{font-size:18px;top:-1.1em;color:var(--ink-3)}
 .priceline .was{font-family:"IBM Plex Mono";color:var(--ink-3);font-size:15px}
@@ -421,6 +437,7 @@ footer a:hover{color:var(--copper)}
   display:flex;align-items:center;justify-content:space-between;gap:14px;transform:translateY(120%);transition:transform .3s ease}
 .sticky.show{transform:translateY(0)}
 .sticky .sp{color:#EDE5D5;font-family:"IBM Plex Mono";font-size:12px;line-height:1.3}
+.sticky .sp s{color:#9a9079}
 .sticky .sp b{font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;color:#fff;display:block}
 .sticky .sp em{font-style:normal;color:var(--copper)}
 .sticky .btn{padding:13px 18px;font-size:15px;white-space:nowrap}
@@ -448,7 +465,7 @@ footer a:hover{color:var(--copper)}
       <span class="nm">THE PROFIT SYSTEM<small>For Electrical Contractors</small></span>
     </a>
     <div class="nav-cta">
-      <span class="nav-price">One-time <b>$97</b></span>
+      <span class="nav-price"><s>$297</s> <b>$97</b></span>
       <a href="#order" class="btn btn-primary nav-btn"><span class="lg">Get the System</span><span class="sm">Get it →</span></a>
     </div>
   </div>
@@ -471,13 +488,27 @@ footer a:hover{color:var(--copper)}
 
 ```
     <div class="priceline">
+      <span class="was-price"><s>$297</s></span>
       <span class="big"><sup>$</sup>97</span>
-      <span class="was"><s>$291 value</s></span>
-      <span class="once">Pay once · own it forever</span>
+      <span class="once">Launch price · pay once</span>
+    </div>
+    <p class="launch-note">⚡ <b>Launch pricing — $97 instead of $297.</b> Every week you bid without it, you're underpricing jobs you can't get back.</p>
+
+    <div class="countdown" id="countdown" style="display:none">
+      <div class="cd-lab">Your launch price ends in</div>
+      <div class="cd-clock">
+        <div class="cd-unit"><b id="cd-d">7</b><span>days</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit"><b id="cd-h">00</b><span>hrs</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit"><b id="cd-m">00</b><span>min</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit"><b id="cd-s">00</b><span>sec</span></div>
+      </div>
     </div>
 
     <div class="hero-cta">
-      <a href="#order" class="btn btn-primary">Get the Profit System <span class="btn-arrow">→</span></a>
+      <a href="#order" class="btn btn-primary">Get instant access — $97 <span class="btn-arrow">→</span></a>
       <span class="btn-sub">Instant download · Excel + Google Sheets · 60-day money-back guarantee</span>
     </div>
   </div>
@@ -532,7 +563,7 @@ footer a:hover{color:var(--copper)}
   <div class="g"><div class="n">3–8%</div><p>The net margin most small shops survive on. One mispriced job erases it.</p></div>
 </div>
 
-<p class="punch rv">It was never the wiring. It was the <em>math behind the wiring</em> — and nobody handed you the sheet that does it.</p>
+<p class="punch rv">It was never the wiring. It was the <em>math behind the wiring</em> — and every job you bid before you fix it is money you don't get back.</p>
 ```
 
   </div>
@@ -561,7 +592,8 @@ footer a:hover{color:var(--copper)}
 
     <div class="stackbox rv">
       <div class="row"><span>Total real value</span><span><s>$291</s></span></div>
-      <div class="row tot"><span>Your price today</span><span><b>$97</b> once</span></div>
+      <div class="row"><span>Regular price</span><span><s>$297</s></span></div>
+      <div class="row tot"><span>Launch price today</span><span><b>$97</b> once</span></div>
     </div>
 
     <div class="hero-cta rv" style="margin-top:22px">
@@ -790,7 +822,7 @@ footer a:hover{color:var(--copper)}
 
   <div class="fitem"><button class="fq">What if I buy it and it's not for me? <span class="pm"></span></button><div class="fa"><div class="fa-in"><b>60-day, no-questions money-back guarantee</b> — and you keep the files either way. The only way you lose is by leaving your pricing the way it is now.</div></div></div>
 
-  <div class="fitem"><button class="fq">Do I get updates and support? <span class="pm"></span></button><div class="fa"><div class="fa-in">Future updates to the workbook are <b>free for life.</b> Setup questions? Reply to your receipt email — a real person answers. <em>(Add your support email here.)</em></div></div></div>
+  <div class="fitem"><button class="fq">Do I get updates and support? <span class="pm"></span></button><div class="fa"><div class="fa-in">Future updates to the workbook are <b>free for life.</b> Setup questions? Email <a href="mailto:support@electroprofitsystem.com" style="color:var(--copper-d);font-weight:600">support@electroprofitsystem.com</a> — a real person answers.</div></div></div>
 </div>
 ```
 
@@ -817,9 +849,9 @@ footer a:hover{color:var(--copper)}
 
 ```
     <div class="final-price">
-      <span class="x"><s>$291</s> today just</span>
+      <span class="x">Launch price — <s>$297</s> today just</span>
       <div class="p"><sup>$</sup>97</div>
-      <span class="once">One-time payment · yours forever · no subscription</span>
+      <span class="once">Going up to $297 soon · pay once · no subscription</span>
     </div>
 
     <a href="#order" class="btn btn-primary">Get Instant Access — $97 <span class="btn-arrow">→</span></a>
@@ -857,8 +889,8 @@ footer a:hover{color:var(--copper)}
 <!-- sticky mobile CTA -->
 
 <div class="sticky" id="sticky">
-  <div class="sp"><span>The Profit System</span><b><em>$97</em> · once</b></div>
-  <a href="#order" class="btn btn-primary">Get it →</a>
+  <div class="sp"><span><s>$297</s> Launch price</span><b><em>$97</em> · pay once</b></div>
+  <a href="#order" class="btn btn-primary">Get access →</a>
 </div>
 
 <script>
@@ -891,6 +923,32 @@ document.querySelectorAll('.fq').forEach(b=>{
 // reveal on scroll
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// ---- Real per-visitor launch countdown (persists, never resets) ----
+(function(){
+  var el=document.getElementById('countdown');
+  if(!el) return;
+  var WINDOW=7*24*60*60*1000; // 7 days
+  var KEY='ps_launch_deadline';
+  var deadline;
+  try{
+    deadline=parseInt(localStorage.getItem(KEY),10);
+    if(!deadline || isNaN(deadline)){ deadline=Date.now()+WINDOW; localStorage.setItem(KEY,deadline); }
+  }catch(e){ deadline=Date.now()+WINDOW; } // private mode: still counts down this session
+  el.style.display='inline-flex';
+  var d=document.getElementById('cd-d'),h=document.getElementById('cd-h'),m=document.getElementById('cd-m'),s=document.getElementById('cd-s');
+  function pad(n){return n<10?'0'+n:''+n;}
+  function tick(){
+    var left=deadline-Date.now();
+    if(left<0) left=0;
+    var dd=Math.floor(left/86400000),
+        hh=Math.floor(left%86400000/3600000),
+        mm=Math.floor(left%3600000/60000),
+        ss=Math.floor(left%60000/1000);
+    d.textContent=dd; h.textContent=pad(hh); m.textContent=pad(mm); s.textContent=pad(ss);
+  }
+  tick(); setInterval(tick,1000);
+})();
 
 // sticky CTA after hero
 const hero=document.querySelector('.hero'), sticky=document.getElementById('sticky');
