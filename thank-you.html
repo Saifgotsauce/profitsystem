@@ -52,9 +52,10 @@ h1 em{font-style:normal;color:var(--copper)}
 .card p b{color:var(--ink)}
 .steps{margin-top:26px}
 .steps h2{font-size:18px;margin-bottom:14px}
-.steps ol{list-style:none;counter-reset:s;display:grid;gap:12px}
-.steps li{counter-increment:s;display:flex;gap:13px;align-items:flex-start;font-size:15px;color:var(--ink2)}
-.steps li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:7px;background:var(--ink);color:#EDE5D5;font-family:"IBM Plex Mono";font-size:13px;font-weight:600;display:grid;place-items:center;margin-top:1px}
+.steps ol{list-style:none;counter-reset:s;display:grid;gap:14px}
+.steps li{counter-increment:s;display:flex;gap:13px;align-items:flex-start;font-size:15px;color:var(--ink2);line-height:1.45}
+.steps li .tx{flex:1;min-width:0;padding-top:3px}
+.steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:8px;background:var(--ink);color:#EDE5D5;font-family:"IBM Plex Mono";font-size:13px;font-weight:600;display:grid;place-items:center}
 .steps li b{color:var(--ink)}
 .help{margin-top:28px;font-size:14.5px;color:var(--ink3);line-height:1.55}
 .help a{color:var(--copperd);font-weight:600;text-decoration:none}
@@ -79,12 +80,12 @@ footer b{color:#EDE5D5;font-family:"Bricolage Grotesque";font-weight:800}
   </div>
 
   <div class="steps">
-    <h2>Do this first (about 20 minutes)</h2>
+    <h2>Where to start (about 20 minutes)</h2>
     <ol>
-      <li>Open the workbook and go to the <b>Quick-Start Checklist</b> — it tells you exactly which cells to fill.</li>
-      <li>Grab a recent <b>pay stub</b> and your <b>insurance / workers' comp</b> numbers.</li>
-      <li>Fill the highlighted cells on the <b>True Hourly Rate</b> tab. Everything else calculates itself.</li>
-      <li>Run your <b>next bid</b> through the Bid Builder before you send it. That's the whole point.</li>
+      <li><span class="tx">Open the workbook and read the Quick-Start Checklist first — it walks you through setup in order.</span></li>
+      <li><span class="tx">Have a recent pay stub and your insurance / workers' comp numbers handy.</span></li>
+      <li><span class="tx">Fill in the highlighted cells on the True Hourly Rate tab — everything else calculates itself.</span></li>
+      <li><span class="tx">Run your next real bid through the Bid Builder before you send it.</span></li>
     </ol>
   </div>
 
