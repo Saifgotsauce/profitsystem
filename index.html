@@ -176,13 +176,23 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 .hero-cta .btn{width:100%}
 /* hero product mockup */
 .hero-shot{position:relative;margin-top:0}
-.hero-shot img{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 50px rgba(40,28,12,.26));border-radius:8px}
-.shot-cap{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-family:"IBM Plex Mono";
+.shot-stage{position:relative;width:100%}
+.shot-stage img{width:100%;height:auto;display:block;border-radius:8px;
+  filter:drop-shadow(0 30px 50px rgba(40,28,12,.26))}
+/* first image sets the height (in normal flow); the rest stack on top and crossfade */
+.shot-stage img:first-child{position:relative;opacity:0}
+.shot-stage .slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+.shot-stage .slide.on{opacity:1}
+.shot-dots{display:flex;gap:6px;margin-top:12px}
+.shot-dots button{width:7px;height:7px;border-radius:50%;border:none;padding:0;cursor:pointer;
+  background:var(--line-2);transition:background .3s,width .3s}
+.shot-dots button.on{background:var(--copper);width:20px;border-radius:4px}
+.shot-cap{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-family:"IBM Plex Mono";
   font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
-.shot-cap .led{width:8px;height:8px;border-radius:50%;background:var(--ledger);
+.shot-cap .led{width:8px;height:8px;border-radius:50%;background:var(--ledger);flex:none;
   box-shadow:0 0 0 3px rgba(47,93,58,.18);animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
-@media(prefers-reduced-motion:reduce){.shot-cap .led{animation:none}}
+@media(prefers-reduced-motion:reduce){.shot-cap .led{animation:none}.shot-stage .slide{transition:none}}
 .priceline{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .priceline .was-price{font-family:"Bricolage Grotesque";font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--ink-3)}
 .priceline .was-price s{text-decoration-thickness:3px;text-decoration-color:var(--copper)}
@@ -523,8 +533,21 @@ footer a:hover{color:var(--copper)}
 
       <!-- product mockup (real screenshot) -->
       <div class="rv hero-shot">
-        <img src="product-pl-dashboard.png" alt="The ElectroProfit System P&amp;L Dashboard shown on a laptop" loading="eager" width="1794" height="1115">
-        <span class="shot-cap"><span class="led"></span>The P&amp;L Dashboard — one of the 12 tabs inside</span>
+        <div class="shot-stage" id="shotStage">
+          <!-- first img (invisible) reserves the height; slides crossfade on top -->
+          <img src="product-pl-dashboard.png" alt="" aria-hidden="true" width="1794" height="1115">
+          <img class="slide on" src="product-pl-dashboard.png" alt="ElectroProfit System — P&amp;L Dashboard" loading="eager" width="1794" height="1115">
+          <img class="slide" src="product-true-hourly-rate.png" alt="ElectroProfit System — True Hourly Rate" loading="lazy" width="1847" height="1131">
+          <img class="slide" src="product-bid-builder.png" alt="ElectroProfit System — Bid Builder" loading="lazy" width="1847" height="1131">
+          <img class="slide" src="product-markup-margin.png" alt="ElectroProfit System — Markup vs Margin" loading="lazy" width="1847" height="1131">
+        </div>
+        <div class="shot-dots" id="shotDots" role="tablist" aria-label="Product preview">
+          <button class="on" aria-label="Preview 1"></button>
+          <button aria-label="Preview 2"></button>
+          <button aria-label="Preview 3"></button>
+          <button aria-label="Preview 4"></button>
+        </div>
+        <span class="shot-cap"><span class="led"></span>A look inside — what the 12 tabs do</span>
       </div>
     </div>
   </div>
@@ -913,13 +936,34 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   tick(); setInterval(tick,1000);
 })();
 
-// sticky CTA after hero
+// ---- Hero product carousel (auto crossfade + dots) ----
+(function(){
+  var stage=document.getElementById('shotStage'), dotsWrap=document.getElementById('shotDots');
+  if(!stage) return;
+  var slides=stage.querySelectorAll('.slide');
+  var dots=dotsWrap.querySelectorAll('button');
+  var i=0, timer, DELAY=3200;
+  function show(n){
+    slides[i].classList.remove('on'); dots[i].classList.remove('on');
+    i=(n+slides.length)%slides.length;
+    slides[i].classList.add('on'); dots[i].classList.add('on');
+  }
+  function next(){ show(i+1); }
+  function start(){ timer=setInterval(next,DELAY); }
+  function stop(){ clearInterval(timer); }
+  dots.forEach(function(d,n){ d.addEventListener('click',function(){ stop(); show(n); start(); }); });
+  // pause on hover (desktop)
+  stage.addEventListener('mouseenter',stop); stage.addEventListener('mouseleave',start);
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce) start();
+})();
 const hero=document.querySelector('.hero'), sticky=document.getElementById('sticky');
 const so=new IntersectionObserver((es)=>{es.forEach(e=>{sticky.classList.toggle('show',!e.isIntersecting&&window.scrollY>500);})},{threshold:0});
 so.observe(hero);
 </script>
 </body>
 </html>
+
 
 
 
