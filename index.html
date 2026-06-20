@@ -162,7 +162,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(241,234,221,.82);
 
 /* ---------- HERO ---------- */
 .hero{padding:34px 0 50px;position:relative}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:42px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
 .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
 .tag{font-family:"IBM Plex Mono";font-size:11.5px;font-weight:500;letter-spacing:.04em;
   background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink-2);
@@ -176,8 +176,8 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 .hero-cta{margin-top:30px}
 .hero-cta .btn{width:100%}
 /* hero product mockup */
-.hero-shot{position:relative;margin-top:8px}
-.hero-shot img{width:100%;height:auto;display:block;filter:drop-shadow(0 40px 60px rgba(40,28,12,.28));border-radius:8px}
+.hero-shot{position:relative;margin-top:0}
+.hero-shot img{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 50px rgba(40,28,12,.26));border-radius:8px}
 .shot-cap{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-family:"IBM Plex Mono";
   font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
 .shot-cap .led{width:8px;height:8px;border-radius:50%;background:var(--ledger);
@@ -185,26 +185,26 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
 @media(prefers-reduced-motion:reduce){.shot-cap .led{animation:none}}
 .priceline{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.priceline .was-price{font-family:"Bricolage Grotesque";font-weight:800;font-size:34px;letter-spacing:-.03em;color:var(--ink-3)}
+.priceline .was-price{font-family:"Bricolage Grotesque";font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--ink-3)}
 .priceline .was-price s{text-decoration-thickness:3px;text-decoration-color:var(--copper)}
-.launch-note{margin-top:12px;font-family:"IBM Plex Mono";font-size:13.5px;color:var(--ink-2);max-width:42ch;line-height:1.4}
+.launch-note{margin-top:14px;font-family:"IBM Plex Sans";font-size:14px;color:var(--ink-2);max-width:46ch;line-height:1.5}
 .launch-note b{color:var(--copper-d)}
 /* countdown */
-.countdown{margin-top:18px;display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;
-  background:var(--ink);border-radius:12px;padding:13px 18px;box-shadow:0 14px 30px -20px rgba(40,28,12,.6)}
-.countdown .cd-lab{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  color:#E89A6A;font-weight:600;line-height:1.3;max-width:15ch}
+.countdown{margin-top:18px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;
+  background:var(--ink);border-radius:12px;padding:16px 20px;box-shadow:0 14px 30px -20px rgba(40,28,12,.6)}
+.countdown .cd-lab{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:#E89A6A;font-weight:600;line-height:1.3;white-space:nowrap}
 .countdown .cd-clock{display:flex;gap:8px}
 .countdown .cd-unit{display:flex;flex-direction:column;align-items:center;min-width:48px}
 .countdown .cd-unit b{font-family:"Bricolage Grotesque";font-weight:800;font-size:28px;color:#F4EDDE;line-height:1;
   font-variant-numeric:tabular-nums}
 .countdown .cd-unit span{font-family:"IBM Plex Mono";font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#9a9079;margin-top:4px}
 .countdown .cd-sep{font-family:"Bricolage Grotesque";font-weight:800;font-size:24px;color:#4d463a;align-self:flex-start;margin-top:1px}
-.priceline .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:40px;letter-spacing:-.03em}
+.priceline .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:34px;letter-spacing:-.03em}
 .priceline .big sup{font-size:18px;top:-1.1em;color:var(--ink-3)}
 .priceline .was{font-family:"IBM Plex Mono";color:var(--ink-3);font-size:15px}
 .priceline .was s{opacity:.7}
-.priceline .once{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ledger);
+.priceline .once{font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ledger);
   border:1px solid var(--ledger);border-radius:6px;padding:5px 9px;font-weight:600}
 
 @media(min-width:900px){
@@ -524,8 +524,8 @@ footer a:hover{color:var(--copper)}
 
       <!-- product mockup (real screenshot) -->
       <div class="rv hero-shot">
-        <img src="product-pl-dashboard.png" alt="The ElectroProfit System P&amp;L Dashboard shown on a laptop" loading="eager" width="1920" height="1440">
-        <span class="shot-cap"><span class="led"></span>Real tab from the workbook — your numbers, live</span>
+        <img src="product-pl-dashboard.png" alt="The ElectroProfit System P&amp;L Dashboard shown on a laptop" loading="eager" width="1794" height="1115">
+        <span class="shot-cap"><span class="led"></span>The P&amp;L Dashboard — one of the 12 tabs inside</span>
       </div>
     </div>
   </div>
@@ -924,4 +924,5 @@ so.observe(hero);
 </script>
 </body>
 </html>
+
 
