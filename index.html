@@ -537,9 +537,9 @@ footer a:hover{color:var(--copper)}
           <!-- first img (invisible) reserves the height; slides crossfade on top -->
           <img src="product-pl-dashboard.png" alt="" aria-hidden="true" width="1794" height="1115">
           <img class="slide on" src="product-pl-dashboard.png" alt="ElectroProfit System — P&amp;L Dashboard" loading="eager" width="1794" height="1115">
-          <img class="slide" src="product-true-hourly-rate.png" alt="ElectroProfit System — True Hourly Rate" loading="lazy" width="1847" height="1131">
-          <img class="slide" src="product-bid-builder.png" alt="ElectroProfit System — Bid Builder" loading="lazy" width="1847" height="1131">
-          <img class="slide" src="product-markup-margin.png" alt="ElectroProfit System — Markup vs Margin" loading="lazy" width="1847" height="1131">
+          <img class="slide" src="product-true-hourly-rate.png" alt="ElectroProfit System — True Hourly Rate" loading="lazy" width="1794" height="1115">
+          <img class="slide" src="product-bid-builder.png" alt="ElectroProfit System — Bid Builder" loading="lazy" width="1794" height="1115">
+          <img class="slide" src="product-markup-margin.png" alt="ElectroProfit System — Markup vs Margin" loading="lazy" width="1794" height="1115">
         </div>
         <div class="shot-dots" id="shotDots" role="tablist" aria-label="Product preview">
           <button class="on" aria-label="Preview 1"></button>
@@ -954,6 +954,16 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   dots.forEach(function(d,n){ d.addEventListener('click',function(){ stop(); show(n); start(); }); });
   // pause on hover (desktop)
   stage.addEventListener('mouseenter',stop); stage.addEventListener('mouseleave',start);
+  // finger swipe (mobile)
+  var x0=null, y0=null;
+  stage.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; y0=e.touches[0].clientY; stop(); },{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(x0===null) return;
+    var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0;
+    // only treat as swipe if mostly horizontal and far enough
+    if(Math.abs(dx)>40 && Math.abs(dx)>Math.abs(dy)){ show(dx<0 ? i+1 : i-1); }
+    x0=null; y0=null; start();
+  },{passive:true});
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce) start();
 })();
