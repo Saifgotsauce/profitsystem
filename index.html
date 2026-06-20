@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -13,7 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Electrical Contractor's Profit System — Stop Guessing What to Charge</title>
-<meta name="description" content="The 12-tab workbook + playbook that tells solo and small electrical contractors their true hourly rate, what to bid, and whether a job actually made money. One-time $97. No subscription.">
+<meta name="description" content="The 12-tab workbook + playbook that tells solo and small electrical contractors their true hourly rate, what to bid, and whether a job actually made money. One-time $197. No subscription.">
 
 <!-- ============================================================
      REPLACE every  href="#order"  and the JS CHECKOUT_URL below
@@ -26,13 +25,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Payhip overlay checkout (loads the on-page checkout) -->
-
 <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
 
 <!-- Vercel Web Analytics (static-site setup) -->
-
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
-
 <script defer src="/_vercel/insights/script.js"></script>
 
 <style>
@@ -179,6 +175,15 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 .hero-sub b{color:var(--ink);font-weight:600}
 .hero-cta{margin-top:30px}
 .hero-cta .btn{width:100%}
+/* hero product mockup */
+.hero-shot{position:relative;margin-top:8px}
+.hero-shot img{width:100%;height:auto;display:block;filter:drop-shadow(0 40px 60px rgba(40,28,12,.28));border-radius:8px}
+.shot-cap{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-family:"IBM Plex Mono";
+  font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}
+.shot-cap .led{width:8px;height:8px;border-radius:50%;background:var(--ledger);
+  box-shadow:0 0 0 3px rgba(47,93,58,.18);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@media(prefers-reduced-motion:reduce){.shot-cap .led{animation:none}}
 .priceline{margin-top:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .priceline .was-price{font-family:"Bricolage Grotesque";font-weight:800;font-size:34px;letter-spacing:-.03em;color:var(--ink-3)}
 .priceline .was-price s{text-decoration-thickness:3px;text-decoration-color:var(--copper)}
@@ -296,7 +301,12 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 .incl li.bonus .tagn{background:var(--copper)}
 .incl li .it b{font-family:"Bricolage Grotesque";font-weight:700;font-size:16.5px;display:block}
 .incl li .it p{font-size:14px;color:var(--ink-2);margin-top:3px;line-height:1.45}
-.incl .val{margin-left:auto;font-family:"IBM Plex Mono";font-size:12.5px;color:var(--ink-3);white-space:nowrap;align-self:center}
+.incl li .it{flex:1;min-width:0}
+.incl .val{margin-left:auto;font-family:"IBM Plex Mono";font-size:12.5px;color:var(--ink-3);white-space:nowrap;align-self:center;flex:none}
+.incl .val .free{font-style:normal;color:var(--ledger);font-weight:600;font-size:11px;letter-spacing:.06em}
+.incl .val s{opacity:.6}
+.stackbox .free-row{color:var(--ledger-soft)}
+.stackbox .free-row .free{color:#8FBF9E;font-family:"IBM Plex Mono";font-weight:600;font-size:13px}
 .stackbox{margin-top:24px;background:var(--ink);color:#EDE5D5;border-radius:14px;padding:22px 24px}
 .stackbox .row{display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:14px;padding:6px 0;color:#C7BDA9}
 .stackbox .row.tot{border-top:1px dashed #413c29;margin-top:8px;padding-top:14px;color:#fff;font-weight:600;font-size:16px}
@@ -408,6 +418,8 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 .final-list .fl .nm svg{width:15px;height:15px;color:var(--ledger);flex:none;transform:translateY(2px)}
 .final-list .fl .nm b{font-weight:600}
 .final-list .fl .v{font-family:"IBM Plex Mono";font-size:13px;color:var(--ink-3);white-space:nowrap}
+.final-list .fl .v .free{font-style:normal;color:var(--ledger);font-weight:600;font-size:11px;letter-spacing:.05em}
+.final-list .fl .v s{opacity:.6}
 .final-list .fl.t{border-bottom:none;padding-top:16px}
 .final-list .fl.t .tt{font-family:"Bricolage Grotesque";font-weight:800;font-size:18px}
 .final-price{text-align:center;margin:22px 0 8px}
@@ -448,7 +460,6 @@ footer a:hover{color:var(--copper)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}*{scroll-behavior:auto}}
 </style>
-
 </head>
 <body>
 
@@ -462,17 +473,16 @@ footer a:hover{color:var(--copper)}
   <div class="nav-in">
     <a href="#top" class="brand">
       <span class="mk"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 13h6l-1 9 9-11h-6l1-9Z" fill="#BC4B1C"/></svg></span>
-      <span class="nm">THE PROFIT SYSTEM<small>For Electrical Contractors</small></span>
+      <span class="nm">ELECTRO<span style="color:var(--copper)">PROFIT</span> SYSTEM<small>For Electrical Contractors</small></span>
     </a>
     <div class="nav-cta">
-      <span class="nav-price"><s>$297</s> <b>$97</b></span>
+      <span class="nav-price"><s>$297</s> <b>$197</b></span>
       <a href="#order" class="btn btn-primary nav-btn"><span class="lg">Get the System</span><span class="sm">Get it →</span></a>
     </div>
   </div>
 </nav>
 
 <!-- ===================== HERO ===================== -->
-
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
@@ -486,61 +496,44 @@ footer a:hover{color:var(--copper)}
         </div>
         <p class="hero-sub">A done-for-you workbook + playbook that hands you your <b>true hourly rate</b>, tells you exactly <b>what to bid</b>, and shows you whether last week's job actually <b>made money</b> — or just kept you busy.</p>
 
+        <div class="priceline">
+          <span class="was-price"><s>$297</s></span>
+          <span class="big"><sup>$</sup>197</span>
+          <span class="once">Launch price · pay once</span>
+        </div>
+        <p class="launch-note">⚡ <b>Launch pricing — $197 instead of $297, with every bonus bundled in free.</b> Every week you bid without it, you're underpricing jobs you can't get back.</p>
 
-    <div class="priceline">
-      <span class="was-price"><s>$297</s></span>
-      <span class="big"><sup>$</sup>97</span>
-      <span class="once">Launch price · pay once</span>
-    </div>
-    <p class="launch-note">⚡ <b>Launch pricing — $97 instead of $297.</b> Every week you bid without it, you're underpricing jobs you can't get back.</p>
+        <div class="countdown" id="countdown" style="display:none">
+          <div class="cd-lab">Your launch price ends in</div>
+          <div class="cd-clock">
+            <div class="cd-unit"><b id="cd-d">7</b><span>days</span></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-unit"><b id="cd-h">00</b><span>hrs</span></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-unit"><b id="cd-m">00</b><span>min</span></div>
+            <span class="cd-sep">:</span>
+            <div class="cd-unit"><b id="cd-s">00</b><span>sec</span></div>
+          </div>
+        </div>
 
-    <div class="countdown" id="countdown" style="display:none">
-      <div class="cd-lab">Your launch price ends in</div>
-      <div class="cd-clock">
-        <div class="cd-unit"><b id="cd-d">7</b><span>days</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit"><b id="cd-h">00</b><span>hrs</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit"><b id="cd-m">00</b><span>min</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit"><b id="cd-s">00</b><span>sec</span></div>
+        <div class="hero-cta">
+          <a href="#order" class="btn btn-primary">Get instant access — $197 <span class="btn-arrow">→</span></a>
+          <span class="btn-sub">Instant download · Excel + Google Sheets · 60-day money-back guarantee</span>
+        </div>
+      </div>
+
+      <!-- product mockup (real screenshot) -->
+      <div class="rv hero-shot">
+        <img src="product-pl-dashboard.png" alt="The ElectroProfit System P&amp;L Dashboard shown on a laptop" loading="eager" width="1920" height="1440">
+        <span class="shot-cap"><span class="led"></span>Real tab from the workbook — your numbers, live</span>
       </div>
     </div>
-
-    <div class="hero-cta">
-      <a href="#order" class="btn btn-primary">Get instant access — $97 <span class="btn-arrow">→</span></a>
-      <span class="btn-sub">Instant download · Excel + Google Sheets · 60-day money-back guarantee</span>
-    </div>
-  </div>
-
-  <!-- workbook mockup -->
-  <div class="rv">
-    <div class="frame tilt">
-      <div class="frame-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="frame-title">Profit-System.xlsx — Dashboard</span></div>
-      <div class="tabs">
-        <span class="tab on">Dashboard</span><span class="tab">True Rate</span><span class="tab">Bid Builder</span><span class="tab">Job Cost</span><span class="tab">P&amp;L</span><span class="tab">+8</span>
-      </div>
-      <div class="sheet">
-        <div class="srow head"><div>This Month</div><div class="num">Target</div><div class="num">Actual</div></div>
-        <div class="srow"><div class="lab">Revenue</div><div class="num">$42,000</div><div class="num">$44,820</div></div>
-        <div class="srow"><div class="lab">True labor cost</div><div class="num">$18,900</div><div class="num">$19,140</div></div>
-        <div class="srow"><div class="lab">Materials + markup</div><div class="num">$9,800</div><div class="num">$10,260</div></div>
-        <div class="srow hl"><div class="lab">Net profit</div><div class="num">$6,300</div><div class="num pos">$7,140</div></div>
-        <div class="srow"><div class="lab">Margin</div><div class="num">15.0%</div><div class="num pos">15.9%</div></div>
-      </div>
-      <div class="sheet-foot"><span>True hourly rate: <b>$96.40/hr</b></span><span>Break-even: <b>$33,210</b></span></div>
-    </div>
-  </div>
-</div>
-
-
   </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- ===================== PROBLEM ===================== -->
-
 <section class="sec problem">
   <div class="wrap">
     <div class="sec-head rv">
@@ -549,79 +542,72 @@ footer a:hover{color:var(--copper)}
       <h2>The work is steady. So why is the account always empty?</h2>
     </div>
 
+    <div class="quote-stack rv">
+      <div class="qcard"><p>"I'm booked solid eight weeks out and I <b>still</b> can't make payroll without sweating it. Where's the money going?"</p><span class="who">— what half this trade says out loud</span></div>
+      <div class="qcard"><p>"Some kid with a van and a Sawzall is bidding the same job at half my number. I'm not racing him <b>to the bottom</b>."</p><span class="who">— on the lowballers</span></div>
+      <div class="qcard"><p>"I pay my journeyman $35 an hour, so I figured $35 was my cost. Turns out he actually <b>costs me $46</b> before I make a dime."</p><span class="who">— on labor burden nobody taught you</span></div>
+      <div class="qcard"><p>"Add it up wrong on a $6K job and there goes the whole month. That's the <b>Chapter 7 quick road</b> right there."</p><span class="who">— on what one bad bid does</span></div>
+    </div>
 
-<div class="quote-stack rv">
-  <div class="qcard"><p>"I'm booked solid eight weeks out and I <b>still</b> can't make payroll without sweating it. Where's the money going?"</p><span class="who">— what half this trade says out loud</span></div>
-  <div class="qcard"><p>"Some kid with a van and a Sawzall is bidding the same job at half my number. I'm not racing him <b>to the bottom</b>."</p><span class="who">— on the lowballers</span></div>
-  <div class="qcard"><p>"I pay my journeyman $35 an hour, so I figured $35 was my cost. Turns out he actually <b>costs me $46</b> before I make a dime."</p><span class="who">— on labor burden nobody taught you</span></div>
-  <div class="qcard"><p>"Add it up wrong on a $6K job and there goes the whole month. That's the <b>Chapter 7 quick road</b> right there."</p><span class="who">— on what one bad bid does</span></div>
-</div>
+    <div class="gut rv">
+      <div class="g"><div class="n">35–60%</div><p>How much contractors underbid by when they price off direct cost and ignore burden.</p></div>
+      <div class="g"><div class="n">~1,300</div><p>Actual billable hours in a year — not 2,080. Spread your overhead over the wrong number and every bid is short.</p></div>
+      <div class="g"><div class="n">3–8%</div><p>The net margin most small shops survive on. One mispriced job erases it.</p></div>
+    </div>
 
-<div class="gut rv">
-  <div class="g"><div class="n">35–60%</div><p>How much contractors underbid by when they price off direct cost and ignore burden.</p></div>
-  <div class="g"><div class="n">~1,300</div><p>Actual billable hours in a year — not 2,080. Spread your overhead over the wrong number and every bid is short.</p></div>
-  <div class="g"><div class="n">3–8%</div><p>The net margin most small shops survive on. One mispriced job erases it.</p></div>
-</div>
-
-<p class="punch rv">It was never the wiring. It was the <em>math behind the wiring</em> — and every job you bid before you fix it is money you don't get back.</p>
-
-
+    <p class="punch rv">It was never the wiring. It was the <em>math behind the wiring</em> — and every job you bid before you fix it is money you don't get back.</p>
   </div>
 </section>
 
 <!-- ===================== PRODUCT REVEAL ===================== -->
-
 <section class="sec" id="inside">
   <div class="wrap">
     <div class="reveal-grid">
       <div>
         <div class="sec-head rv" style="margin-bottom:26px">
           <span class="snum">02 / What you actually get</span>
-          <span class="eyebrow" style="margin-top:10px">The Profit System</span>
+          <span class="eyebrow" style="margin-top:10px">The ElectroProfit System</span>
           <h2>One workbook that knows your numbers cold.</h2>
           <p>Built in plain Excel and Google Sheets. You type in <b>your</b> wages, <b>your</b> overhead, <b>your</b> state's comp and taxes — it does every calculation that's been quietly eating your margin.</p>
         </div>
 
+        <ul class="incl rv">
+          <li><span class="tagn">CORE</span><div class="it"><b>The 12-Tab ElectroProfit Workbook</b><p>Bidding, job costing, labor burden, true hourly rate, live job tracking, P&amp;L and break-even — all wired together.</p></div><span class="val">$297</span></li>
+          <li class="bonus"><span class="tagn">+1</span><div class="it"><b>The 30-Page Playbook (PDF)</b><p>The "why" behind every tab, in contractor English. Read it once, price right forever.</p></div><span class="val"><s>$39</s> <em class="free">FREE</em></span></li>
+          <li class="bonus"><span class="tagn">+2</span><div class="it"><b>Quick-Start Checklist</b><p>From download to your true hourly rate in about 20 minutes. No spreadsheet skills needed.</p></div><span class="val"><s>$19</s> <em class="free">FREE</em></span></li>
+          <li class="bonus"><span class="tagn">+3</span><div class="it"><b>Residential vs. Commercial Cheat Sheet</b><p>Different burden, markup and margin targets for each — so you stop blending two businesses into one bad number.</p></div><span class="val"><s>$40</s> <em class="free">FREE</em></span></li>
+        </ul>
 
-    <ul class="incl rv">
-      <li><span class="tagn">CORE</span><div class="it"><b>The 12-Tab Profit Workbook</b><p>Bidding, job costing, labor burden, true hourly rate, live job tracking, P&amp;L and break-even — all wired together.</p></div><span class="val">$199</span></li>
-      <li class="bonus"><span class="tagn">+1</span><div class="it"><b>The 30-Page Playbook (PDF)</b><p>The "why" behind every tab, in contractor English. Read it once, price right forever.</p></div><span class="val">$39</span></li>
-      <li class="bonus"><span class="tagn">+2</span><div class="it"><b>Quick-Start Checklist</b><p>From download to your true hourly rate in about 20 minutes. No spreadsheet skills needed.</p></div><span class="val">$19</span></li>
-      <li class="bonus"><span class="tagn">+3</span><div class="it"><b>Residential vs. Commercial Cheat Sheet</b><p>Different burden, markup and margin targets for each — so you stop blending two businesses into one bad number.</p></div><span class="val">$40</span></li>
-    </ul>
+        <div class="stackbox rv">
+          <div class="row"><span>Everything above</span><span><s>$297</s></span></div>
+          <div class="row free-row"><span>The 3 bonuses</span><span><b class="free">Bundled free</b></span></div>
+          <div class="row tot"><span>Your price today</span><span><b>$197</b> once</span></div>
+        </div>
 
-    <div class="stackbox rv">
-      <div class="row"><span>Total value</span><span><s>$297</s></span></div>
-      <div class="row tot"><span>Launch price today</span><span><b>$97</b> once</span></div>
-    </div>
-
-    <div class="hero-cta rv" style="margin-top:22px">
-      <a href="#order" class="btn btn-primary">Get everything for $97 <span class="btn-arrow">→</span></a>
-      <span class="btn-sub">Instant download · keep the files even if you refund</span>
-    </div>
-  </div>
-
-  <!-- book mockup -->
-  <div class="rv">
-    <div class="book">
-      <div>
-        <div class="bk-top">The Playbook · 30 pages</div>
-        <div class="bk-rule"></div>
-        <h3>The Electrical Contractor's Profit System</h3>
+        <div class="hero-cta rv" style="margin-top:22px">
+          <a href="#order" class="btn btn-primary">Get everything for $197 <span class="btn-arrow">→</span></a>
+          <span class="btn-sub">Instant download · keep the files even if you refund</span>
+        </div>
       </div>
-      <div class="bk-foot">Know your rate. Price the job. Keep the profit.</div>
+
+      <!-- book mockup -->
+      <div class="rv">
+        <div class="book">
+          <div>
+            <div class="bk-top">The Playbook · 30 pages</div>
+            <div class="bk-rule"></div>
+            <h3>The Electrical Contractor's Profit System</h3>
+          </div>
+          <div class="bk-foot">Know your rate. Price the job. Keep the profit.</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-
   </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- ===================== ALL YOU NEED + ROI ===================== -->
-
 <section class="sec allneed" id="why">
   <div class="wrap">
     <div class="sec-head rv">
@@ -631,31 +617,27 @@ footer a:hover{color:var(--copper)}
       <p>Knowify and TurboBid are powerful — and built for shops with an office manager and time to learn them. You don't need another login at $99–$149 a month. You need the math, done once, in a tool you already own.</p>
     </div>
 
+    <div class="an-grid rv">
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It runs where you already work</b><p>Opens in Excel or free Google Sheets. Nothing to install, no seats, no IT.</p></div></div>
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It answers the only 3 questions that matter</b><p>What does an hour really cost me? What do I bid? Did the job make money?</p></div></div>
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It fits a one-truck shop, not a 50-man GC</b><p>No bloated modules you'll never touch. Just the tabs that move your bank balance.</p></div></div>
+      <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>You own it — they rent it to you</b><p>Pay $197 once. No card on file. No "your plan is expiring" emails forever.</p></div></div>
+    </div>
 
-<div class="an-grid rv">
-  <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It runs where you already work</b><p>Opens in Excel or free Google Sheets. Nothing to install, no seats, no IT.</p></div></div>
-  <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It answers the only 3 questions that matter</b><p>What does an hour really cost me? What do I bid? Did the job make money?</p></div></div>
-  <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>It fits a one-truck shop, not a 50-man GC</b><p>No bloated modules you'll never touch. Just the tabs that move your bank balance.</p></div></div>
-  <div class="an"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>You own it — they rent it to you</b><p>Pay $97 once. No card on file. No "your plan is expiring" emails forever.</p></div></div>
-</div>
+    <div class="sec-head rv" style="margin:54px 0 28px">
+      <span class="snum">04 / The math on $197</span>
+      <h2 style="margin-top:14px">Three ways this pays for itself before the weekend.</h2>
+    </div>
 
-<div class="sec-head rv" style="margin:54px 0 28px">
-  <span class="snum">04 / The math on $97</span>
-  <h2 style="margin-top:14px">Three ways this pays for itself before the weekend.</h2>
-</div>
-
-<div class="compare rv">
-  <div class="ccard"><span class="vs">vs. software</span><div class="ctop">Knowify / TurboBid</div><div class="cbig"><span class="strike">$1,788</span></div><div class="cnote">A year of $149/mo software you'll half-use. The Profit System is <b>$97, once</b> — that's the first 6 days of their subscription.</div></div>
-  <div class="ccard"><span class="vs">vs. one bad bid</span><div class="ctop">A single underbid job</div><div class="cbig">$2,100</div><div class="cnote">Underbid a routine $6K job by 35% and that's gone. The system exists to stop exactly that — <b>once</b>.</div></div>
-  <div class="ccard win"><span class="vs">vs. one mispriced hour</span><div class="ctop">Your true hourly rate</div><div class="cbig">+$11/hr</div><div class="cnote">Find you've been billing $11/hr under true cost across ~1,300 hours? That's <b>$14,300 a year</b> you were leaving on the bench.</div></div>
-</div>
-
-
+    <div class="compare rv">
+      <div class="ccard"><span class="vs">vs. software</span><div class="ctop">Knowify / TurboBid</div><div class="cbig"><span class="strike">$1,788</span></div><div class="cnote">A year of $149/mo software you'll half-use. The ElectroProfit System is <b>$197, once</b> — about 5 weeks of their subscription.</div></div>
+      <div class="ccard"><span class="vs">vs. one bad bid</span><div class="ctop">A single underbid job</div><div class="cbig">$2,100</div><div class="cnote">Underbid a routine $6K job by 35% and that's gone. The system exists to stop exactly that — <b>once</b>.</div></div>
+      <div class="ccard win"><span class="vs">vs. one mispriced hour</span><div class="ctop">Your true hourly rate</div><div class="cbig">+$11/hr</div><div class="cnote">Find you've been billing $11/hr under true cost across ~1,300 hours? That's <b>$14,300 a year</b> you were leaving on the bench.</div></div>
+    </div>
   </div>
 </section>
 
 <!-- ===================== DETAILED BREAKDOWN ===================== -->
-
 <section class="sec" id="tabs">
   <div class="wrap">
     <div class="sec-head rv">
@@ -665,84 +647,80 @@ footer a:hover{color:var(--copper)}
       <p>Here's what's behind each tab and what it spits out. Type your numbers once; they flow everywhere.</p>
     </div>
 
+    <div class="tabrow">
 
-<div class="tabrow">
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>02 · True Hourly Rate</span><span>$ / hr</span></div>
+          <div class="mrow"><div class="l">Base wage</div><div class="v">$35.00</div></div>
+          <div class="mrow"><div class="l">+ Burden (taxes, comp, benefits)</div><div class="v">$11.20</div></div>
+          <div class="mrow"><div class="l">÷ Billable hours (1,300)</div><div class="v">×</div></div>
+          <div class="mrow k"><div class="l">True cost / billable hr</div><div class="v">$96.40</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 02</div><h3>True Hourly Rate</h3><p>The number that fixes everything else. Turns base wage into what an hour actually costs once burden and real billable hours are in — the figure most shops have never calculated.</p><div class="does"><span>labor burden</span><span>billable-hour reality</span><span>overhead recovery</span></div></div>
+      </div>
 
-  <div class="tabitem rv">
-    <div class="tab-mini"><div class="mhead"><span>02 · True Hourly Rate</span><span>$ / hr</span></div>
-      <div class="mrow"><div class="l">Base wage</div><div class="v">$35.00</div></div>
-      <div class="mrow"><div class="l">+ Burden (taxes, comp, benefits)</div><div class="v">$11.20</div></div>
-      <div class="mrow"><div class="l">÷ Billable hours (1,300)</div><div class="v">×</div></div>
-      <div class="mrow k"><div class="l">True cost / billable hr</div><div class="v">$96.40</div></div>
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>04 · Bid Builder</span><span>quote</span></div>
+          <div class="mrow"><div class="l">Labor (hrs × true rate)</div><div class="v">$3,856</div></div>
+          <div class="mrow"><div class="l">Materials + markup 22%</div><div class="v">$1,830</div></div>
+          <div class="mrow"><div class="l">Overhead allocation</div><div class="v">$642</div></div>
+          <div class="mrow k"><div class="l">Bid price (28% margin)</div><div class="v">$8,790</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TABS 04–05</div><h3>Bid Builder — Residential &amp; Commercial</h3><p>Plug in hours and materials; it builds a defensible price at the margin <em>you</em> set. Separate builders for resi and commercial because the burden and markup aren't the same.</p><div class="does"><span>resi + commercial</span><span>set your margin</span><span>line-item ready</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>07 · Job Costing</span><span>est vs actual</span></div>
+          <div class="mrow"><div class="l">Estimated cost</div><div class="v">$6,328</div></div>
+          <div class="mrow"><div class="l">Actual cost</div><div class="v">$6,910</div></div>
+          <div class="mrow"><div class="l">Variance</div><div class="v neg">–$582</div></div>
+          <div class="mrow k"><div class="l">Real margin earned</div><div class="v">19.4%</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 07</div><h3>Job Costing — Estimate vs. Actual</h3><p>After the job, see exactly where you bled — labor, materials, or change orders you ate. The feedback loop that makes your <em>next</em> bid sharper.</p><div class="does"><span>variance tracking</span><span>change-order capture</span><span>real margin</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>08 · Job Tracker</span><span>active</span></div>
+          <div class="mrow"><div class="l">Westwood remodel</div><div class="v pos">on track</div></div>
+          <div class="mrow"><div class="l">Mercer panel upgrade</div><div class="v neg">over hrs</div></div>
+          <div class="mrow"><div class="l">Hilltop new const.</div><div class="v pos">on track</div></div>
+          <div class="mrow k"><div class="l">Open job profit (proj.)</div><div class="v">$11,240</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 08</div><h3>Live Job Tracker</h3><p>Every active job on one screen — hours logged vs. bid, projected profit, what's slipping. Catch a job going sideways while you can still fix it.</p><div class="does"><span>hours vs bid</span><span>projected profit</span><span>red-flag alerts</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>09 · Break-Even</span><span>monthly</span></div>
+          <div class="mrow"><div class="l">Fixed overhead / mo</div><div class="v">$9,180</div></div>
+          <div class="mrow"><div class="l">Avg gross margin</div><div class="v">31%</div></div>
+          <div class="mrow k"><div class="l">Revenue to break even</div><div class="v">$29,610</div></div>
+          <div class="mrow"><div class="l">Billable hrs needed</div><div class="v">307</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TAB 09</div><h3>Break-Even Calculator</h3><p>The number you have to hit before you've earned a dollar. Know it cold and you'll never panic-bid a January job again.</p><div class="does"><span>fixed-cost coverage</span><span>hours-to-survive</span><span>price floor</span></div></div>
+      </div>
+
+      <div class="tabitem rv">
+        <div class="tab-mini"><div class="mhead"><span>10 · P&amp;L</span><span>this month</span></div>
+          <div class="mrow"><div class="l">Revenue</div><div class="v">$44,820</div></div>
+          <div class="mrow"><div class="l">Cost of work</div><div class="v">$31,460</div></div>
+          <div class="mrow"><div class="l">Overhead</div><div class="v">$6,220</div></div>
+          <div class="mrow k"><div class="l">Net profit</div><div class="v pos">$7,140</div></div>
+        </div>
+        <div class="tab-txt"><div class="num">TABS 01 · 10 · 11</div><h3>Dashboard, P&amp;L &amp; Overhead</h3><p>The whole shop at a glance: a plain-English profit-and-loss, your fixed and overhead costs itemized, and a dashboard that turns it all into the few numbers you actually steer by.</p><div class="does"><span>monthly P&amp;L</span><span>overhead detail</span><span>one-screen dashboard</span></div></div>
+      </div>
+
     </div>
-    <div class="tab-txt"><div class="num">TAB 02</div><h3>True Hourly Rate</h3><p>The number that fixes everything else. Turns base wage into what an hour actually costs once burden and real billable hours are in — the figure most shops have never calculated.</p><div class="does"><span>labor burden</span><span>billable-hour reality</span><span>overhead recovery</span></div></div>
-  </div>
 
-  <div class="tabitem rv">
-    <div class="tab-mini"><div class="mhead"><span>04 · Bid Builder</span><span>quote</span></div>
-      <div class="mrow"><div class="l">Labor (hrs × true rate)</div><div class="v">$3,856</div></div>
-      <div class="mrow"><div class="l">Materials + markup 22%</div><div class="v">$1,830</div></div>
-      <div class="mrow"><div class="l">Overhead allocation</div><div class="v">$642</div></div>
-      <div class="mrow k"><div class="l">Bid price (28% margin)</div><div class="v">$8,790</div></div>
+    <div class="hero-cta rv" style="margin-top:34px;text-align:center">
+      <a href="#order" class="btn btn-primary">Put these tabs to work — $197 <span class="btn-arrow">→</span></a>
+      <span class="btn-sub">Plus Materials &amp; Markup, Quick-Quote cheat sheet, and the Playbook</span>
     </div>
-    <div class="tab-txt"><div class="num">TABS 04–05</div><h3>Bid Builder — Residential &amp; Commercial</h3><p>Plug in hours and materials; it builds a defensible price at the margin <em>you</em> set. Separate builders for resi and commercial because the burden and markup aren't the same.</p><div class="does"><span>resi + commercial</span><span>set your margin</span><span>line-item ready</span></div></div>
-  </div>
-
-  <div class="tabitem rv">
-    <div class="tab-mini"><div class="mhead"><span>07 · Job Costing</span><span>est vs actual</span></div>
-      <div class="mrow"><div class="l">Estimated cost</div><div class="v">$6,328</div></div>
-      <div class="mrow"><div class="l">Actual cost</div><div class="v">$6,910</div></div>
-      <div class="mrow"><div class="l">Variance</div><div class="v neg">–$582</div></div>
-      <div class="mrow k"><div class="l">Real margin earned</div><div class="v">19.4%</div></div>
-    </div>
-    <div class="tab-txt"><div class="num">TAB 07</div><h3>Job Costing — Estimate vs. Actual</h3><p>After the job, see exactly where you bled — labor, materials, or change orders you ate. The feedback loop that makes your <em>next</em> bid sharper.</p><div class="does"><span>variance tracking</span><span>change-order capture</span><span>real margin</span></div></div>
-  </div>
-
-  <div class="tabitem rv">
-    <div class="tab-mini"><div class="mhead"><span>08 · Job Tracker</span><span>active</span></div>
-      <div class="mrow"><div class="l">Westwood remodel</div><div class="v pos">on track</div></div>
-      <div class="mrow"><div class="l">Mercer panel upgrade</div><div class="v neg">over hrs</div></div>
-      <div class="mrow"><div class="l">Hilltop new const.</div><div class="v pos">on track</div></div>
-      <div class="mrow k"><div class="l">Open job profit (proj.)</div><div class="v">$11,240</div></div>
-    </div>
-    <div class="tab-txt"><div class="num">TAB 08</div><h3>Live Job Tracker</h3><p>Every active job on one screen — hours logged vs. bid, projected profit, what's slipping. Catch a job going sideways while you can still fix it.</p><div class="does"><span>hours vs bid</span><span>projected profit</span><span>red-flag alerts</span></div></div>
-  </div>
-
-  <div class="tabitem rv">
-    <div class="tab-mini"><div class="mhead"><span>09 · Break-Even</span><span>monthly</span></div>
-      <div class="mrow"><div class="l">Fixed overhead / mo</div><div class="v">$9,180</div></div>
-      <div class="mrow"><div class="l">Avg gross margin</div><div class="v">31%</div></div>
-      <div class="mrow k"><div class="l">Revenue to break even</div><div class="v">$29,610</div></div>
-      <div class="mrow"><div class="l">Billable hrs needed</div><div class="v">307</div></div>
-    </div>
-    <div class="tab-txt"><div class="num">TAB 09</div><h3>Break-Even Calculator</h3><p>The number you have to hit before you've earned a dollar. Know it cold and you'll never panic-bid a January job again.</p><div class="does"><span>fixed-cost coverage</span><span>hours-to-survive</span><span>price floor</span></div></div>
-  </div>
-
-  <div class="tabitem rv">
-    <div class="tab-mini"><div class="mhead"><span>10 · P&amp;L</span><span>this month</span></div>
-      <div class="mrow"><div class="l">Revenue</div><div class="v">$44,820</div></div>
-      <div class="mrow"><div class="l">Cost of work</div><div class="v">$31,460</div></div>
-      <div class="mrow"><div class="l">Overhead</div><div class="v">$6,220</div></div>
-      <div class="mrow k"><div class="l">Net profit</div><div class="v pos">$7,140</div></div>
-    </div>
-    <div class="tab-txt"><div class="num">TABS 01 · 10 · 11</div><h3>Dashboard, P&amp;L &amp; Overhead</h3><p>The whole shop at a glance: a plain-English profit-and-loss, your fixed and overhead costs itemized, and a dashboard that turns it all into the few numbers you actually steer by.</p><div class="does"><span>monthly P&amp;L</span><span>overhead detail</span><span>one-screen dashboard</span></div></div>
-  </div>
-
-</div>
-
-<div class="hero-cta rv" style="margin-top:34px;text-align:center">
-  <a href="#order" class="btn btn-primary">Put these tabs to work — $97 <span class="btn-arrow">→</span></a>
-  <span class="btn-sub">Plus Materials &amp; Markup, Quick-Quote cheat sheet, and the Playbook</span>
-</div>
-
-
   </div>
 </section>
 
 <div class="divider"></div>
 
 <!-- ===================== WHO IT'S FOR ===================== -->
-
 <section class="sec" id="who">
   <div class="wrap">
     <div class="sec-head rv">
@@ -774,7 +752,6 @@ footer a:hover{color:var(--copper)}
 </section>
 
 <!-- ===================== GUARANTEE ===================== -->
-
 <section class="sec guar" id="guarantee">
   <div class="wrap">
     <div class="guar-in">
@@ -794,7 +771,6 @@ footer a:hover{color:var(--copper)}
 </section>
 
 <!-- ===================== FAQ ===================== -->
-
 <section class="sec" id="faq">
   <div class="wrap">
     <div class="sec-head rv" style="margin-inline:auto;text-align:center;max-width:40ch">
@@ -802,34 +778,30 @@ footer a:hover{color:var(--copper)}
       <h2 style="margin-top:14px">The questions you're already asking.</h2>
     </div>
     <div class="faq rv">
-      <div class="fitem"><button class="fq">Is this a monthly subscription? <span class="pm"></span></button><div class="fa"><div class="fa-in">No. It's <b>$97 one time.</b> Download it, it's yours forever — including future updates. No card kept on file, no auto-renewal, no "your trial is ending" emails.</div></div></div>
+      <div class="fitem"><button class="fq">Is this a monthly subscription? <span class="pm"></span></button><div class="fa"><div class="fa-in">No. It's <b>$197 one time.</b> Download it, it's yours forever — including future updates. No card kept on file, no auto-renewal, no "your trial is ending" emails.</div></div></div>
 
+      <div class="fitem"><button class="fq">Do I need Excel? I mostly use my phone. <span class="pm"></span></button><div class="fa"><div class="fa-in">It works in <b>Excel and free Google Sheets.</b> If you've got a Gmail address, you can run it free in your browser or the Sheets app — phone, tablet, or the laptop in the truck.</div></div></div>
 
-  <div class="fitem"><button class="fq">Do I need Excel? I mostly use my phone. <span class="pm"></span></button><div class="fa"><div class="fa-in">It works in <b>Excel and free Google Sheets.</b> If you've got a Gmail address, you can run it free in your browser or the Sheets app — phone, tablet, or the laptop in the truck.</div></div></div>
+      <div class="fitem"><button class="fq">I'm not a spreadsheet guy. Will I actually be able to use it? <span class="pm"></span></button><div class="fa"><div class="fa-in">That's exactly who it's built for. You type your numbers into the <b>highlighted cells only</b> — every formula is already wired. The Quick-Start Checklist walks you to your true hourly rate in about 20 minutes.</div></div></div>
 
-  <div class="fitem"><button class="fq">I'm not a spreadsheet guy. Will I actually be able to use it? <span class="pm"></span></button><div class="fa"><div class="fa-in">That's exactly who it's built for. You type your numbers into the <b>highlighted cells only</b> — every formula is already wired. The Quick-Start Checklist walks you to your true hourly rate in about 20 minutes.</div></div></div>
+      <div class="fitem"><button class="fq">How is this different from Knowify or TurboBid? <span class="pm"></span></button><div class="fa"><div class="fa-in">Those are full software platforms at <b>$99–$149 a month</b> built for bigger shops with someone to run them. This is the <b>core math</b> — true rate, bidding, job costing, P&amp;L — with no learning curve and no monthly bill. Different tool for a one- or two-truck shop.</div></div></div>
 
-  <div class="fitem"><button class="fq">How is this different from Knowify or TurboBid? <span class="pm"></span></button><div class="fa"><div class="fa-in">Those are full software platforms at <b>$99–$149 a month</b> built for bigger shops with someone to run them. This is the <b>core math</b> — true rate, bidding, job costing, P&amp;L — with no learning curve and no monthly bill. Different tool for a one- or two-truck shop.</div></div></div>
+      <div class="fitem"><button class="fq">Residential, commercial, or both? <span class="pm"></span></button><div class="fa"><div class="fa-in">Both. There are separate bid builders for residential and commercial, plus a cheat sheet with different burden, markup, and margin targets for each — so you stop running two different businesses off one blended number.</div></div></div>
 
-  <div class="fitem"><button class="fq">Residential, commercial, or both? <span class="pm"></span></button><div class="fa"><div class="fa-in">Both. There are separate bid builders for residential and commercial, plus a cheat sheet with different burden, markup, and margin targets for each — so you stop running two different businesses off one blended number.</div></div></div>
+      <div class="fitem"><button class="fq">I've been doing this 20 years. What's this going to tell me I don't know? <span class="pm"></span></button><div class="fa"><div class="fa-in">Maybe nothing — or maybe that you've been off by 5 points on burden the whole time, which quietly underbids <b>every</b> job. The workbook just makes your numbers exact instead of "close enough." Most veterans are surprised by their real billable-hour count.</div></div></div>
 
-  <div class="fitem"><button class="fq">I've been doing this 20 years. What's this going to tell me I don't know? <span class="pm"></span></button><div class="fa"><div class="fa-in">Maybe nothing — or maybe that you've been off by 5 points on burden the whole time, which quietly underbids <b>every</b> job. The workbook just makes your numbers exact instead of "close enough." Most veterans are surprised by their real billable-hour count.</div></div></div>
+      <div class="fitem"><button class="fq">How long until it's actually set up? <span class="pm"></span></button><div class="fa"><div class="fa-in">Plan on <b>about 20–30 minutes</b> with a recent pay stub and your insurance numbers handy. After that, each new bid takes a couple of minutes.</div></div></div>
 
-  <div class="fitem"><button class="fq">How long until it's actually set up? <span class="pm"></span></button><div class="fa"><div class="fa-in">Plan on <b>about 20–30 minutes</b> with a recent pay stub and your insurance numbers handy. After that, each new bid takes a couple of minutes.</div></div></div>
+      <div class="fitem"><button class="fq">Will it work for my state? I'm in Canada. <span class="pm"></span></button><div class="fa"><div class="fa-in">Yes. Nothing is hard-coded — <b>you enter your own</b> wages, tax rates, workers' comp, and overhead, so it works in any US state and across Canada. The math is universal; the numbers are yours.</div></div></div>
 
-  <div class="fitem"><button class="fq">Will it work for my state? I'm in Canada. <span class="pm"></span></button><div class="fa"><div class="fa-in">Yes. Nothing is hard-coded — <b>you enter your own</b> wages, tax rates, workers' comp, and overhead, so it works in any US state and across Canada. The math is universal; the numbers are yours.</div></div></div>
+      <div class="fitem"><button class="fq">What if I buy it and it's not for me? <span class="pm"></span></button><div class="fa"><div class="fa-in"><b>60-day, no-questions money-back guarantee</b> — and you keep the files either way. The only way you lose is by leaving your pricing the way it is now.</div></div></div>
 
-  <div class="fitem"><button class="fq">What if I buy it and it's not for me? <span class="pm"></span></button><div class="fa"><div class="fa-in"><b>60-day, no-questions money-back guarantee</b> — and you keep the files either way. The only way you lose is by leaving your pricing the way it is now.</div></div></div>
-
-  <div class="fitem"><button class="fq">Do I get updates and support? <span class="pm"></span></button><div class="fa"><div class="fa-in">Future updates to the workbook are <b>free for life.</b> Setup questions? Email <a href="mailto:support@electroprofitsystem.com" style="color:var(--copper-d);font-weight:600">support@electroprofitsystem.com</a> — a real person answers.</div></div></div>
-</div>
-
-
+      <div class="fitem"><button class="fq">Do I get updates and support? <span class="pm"></span></button><div class="fa"><div class="fa-in">Future updates to the workbook are <b>free for life.</b> Setup questions? Email <a href="mailto:support@electroprofitsystem.com" style="color:var(--copper-d);font-weight:600">support@electroprofitsystem.com</a> — a real person answers.</div></div></div>
+    </div>
   </div>
 </section>
 
 <!-- ===================== FINAL CTA ===================== -->
-
 <section class="sec final" id="order">
   <div class="wrap">
     <div class="final-card rv">
@@ -839,32 +811,29 @@ footer a:hover{color:var(--copper)}
       </div>
       <div class="final-body">
         <div class="final-list">
-          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><b>The 12-Tab Profit Workbook</b></span><span class="v">$199</span></div>
-          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>The 30-Page Profit Playbook (PDF)</span><span class="v">$39</span></div>
-          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>20-Minute Quick-Start Checklist</span><span class="v">$19</span></div>
-          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Residential vs. Commercial Cheat Sheet</span><span class="v">$40</span></div>
-          <div class="fl t"><span class="nm"><span class="tt">Total value</span></span><span class="v" style="font-size:15px"><s>$297</s></span></div>
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg><b>The 12-Tab ElectroProfit Workbook</b></span><span class="v">$297</span></div>
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>The 30-Page Playbook (PDF)</span><span class="v"><s>$39</s> <em class="free">FREE</em></span></div>
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>20-Minute Quick-Start Checklist</span><span class="v"><s>$19</s> <em class="free">FREE</em></span></div>
+          <div class="fl"><span class="nm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Residential vs. Commercial Cheat Sheet</span><span class="v"><s>$40</s> <em class="free">FREE</em></span></div>
+          <div class="fl t"><span class="nm"><span class="tt">Bonuses bundled free — you pay</span></span><span class="v" style="font-size:15px"><b>$197</b></span></div>
         </div>
 
+        <div class="final-price">
+          <span class="x">Launch price — <s>$297</s> today just</span>
+          <div class="p"><sup>$</sup>197</div>
+          <span class="once">Bonuses included free · pay once · no subscription</span>
+        </div>
 
-    <div class="final-price">
-      <span class="x">Launch price — <s>$297</s> today just</span>
-      <div class="p"><sup>$</sup>97</div>
-      <span class="once">Going up to $297 soon · pay once · no subscription</span>
+        <a href="#order" class="btn btn-primary">Get Instant Access — $197 <span class="btn-arrow">→</span></a>
+
+        <div class="trust-row">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Instant download</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Excel + Google Sheets</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> 60-day guarantee</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Keep the files</span>
+        </div>
+      </div>
     </div>
-
-    <a href="#order" class="btn btn-primary">Get Instant Access — $97 <span class="btn-arrow">→</span></a>
-
-    <div class="trust-row">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Instant download</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Excel + Google Sheets</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> 60-day guarantee</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> Keep the files</span>
-    </div>
-  </div>
-</div>
-
-
   </div>
 </section>
 
@@ -873,7 +842,7 @@ footer a:hover{color:var(--copper)}
     <div>
       <a href="#top" class="brand">
         <span class="mk"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 13h6l-1 9 9-11h-6l1-9Z" fill="#BC4B1C"/></svg></span>
-        <span class="nm" style="color:#EDE5D5">THE PROFIT SYSTEM<small>For Electrical Contractors</small></span>
+        <span class="nm" style="color:#EDE5D5">ELECTRO<span style="color:var(--copper)">PROFIT</span> SYSTEM<small>For Electrical Contractors</small></span>
       </a>
       <p>For US &amp; Canadian electrical contractors. This is a planning and estimating tool, not accounting, tax, or legal advice — figures shown are illustrative. Results depend on the numbers you put in and the decisions you make.</p>
     </div>
@@ -886,9 +855,8 @@ footer a:hover{color:var(--copper)}
 </footer>
 
 <!-- sticky mobile CTA -->
-
 <div class="sticky" id="sticky">
-  <div class="sp"><span><s>$297</s> Launch price</span><b><em>$97</em> · pay once</b></div>
+  <div class="sp"><span><s>$297</s> Launch price</span><b><em>$197</em> · pay once</b></div>
   <a href="#order" class="btn btn-primary">Get access →</a>
 </div>
 
@@ -954,6 +922,6 @@ const hero=document.querySelector('.hero'), sticky=document.getElementById('stic
 const so=new IntersectionObserver((es)=>{es.forEach(e=>{sticky.classList.toggle('show',!e.isIntersecting&&window.scrollY>500);})},{threshold:0});
 so.observe(hero);
 </script>
-
 </body>
 </html>
+
