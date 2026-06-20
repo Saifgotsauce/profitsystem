@@ -24,8 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Payhip overlay checkout (loads the on-page checkout) -->
-<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+<!-- Checkout: SendOwl (via Stripe). Buttons link out to SendOwl checkout; no extra script needed. -->
 
 <!-- Vercel Web Analytics (static-site setup) -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -862,21 +861,18 @@ footer a:hover{color:var(--copper)}
 
 <script>
 /* ============================================================
-   PAYHIP OVERLAY CHECKOUT
-   Buyers check out in an overlay ON your page — no jarring redirect.
-   ▼▼ EDIT THIS ONE LINE: paste your Payhip product KEY (the part
-      after /b/ in your product link, e.g. payhip.com/b/AbC12 → "AbC12") ▼▼ */
-const PAYHIP_PRODUCT_KEY = "6L3T2";
-/* ▲▲ Every "Get the System" button opens the Payhip checkout overlay ▲▲ */
+   SENDOWL CHECKOUT
+   Every "Get instant access" button sends the buyer to your
+   SendOwl checkout. SendOwl charges via Stripe and delivers the
+   files with a secure, expiring download link.
+   ▼▼ EDIT THIS ONE LINE if your SendOwl product URL ever changes ▼▼ */
+const CHECKOUT_URL = "https://transactions.sendowl.com/psp/products/79489162/E4C41EE7/purchase";
+/* ▲▲ ▲▲ */
 
 document.querySelectorAll('a[href="#order"]').forEach(a=>{
-  a.setAttribute('href', 'https://payhip.com/b/' + PAYHIP_PRODUCT_KEY);
-  a.classList.add('payhip-buy-button');
-  a.setAttribute('data-theme','none');            // keep your own button styling
-  a.setAttribute('data-product', PAYHIP_PRODUCT_KEY);
+  a.setAttribute('href', CHECKOUT_URL);
+  a.setAttribute('rel','nofollow');
 });
-/* Fallback: if Payhip's script is blocked, the href still links to checkout,
-   so no button is ever dead. */
 
 // FAQ accordion
 document.querySelectorAll('.fq').forEach(b=>{
@@ -924,5 +920,6 @@ so.observe(hero);
 </script>
 </body>
 </html>
+
 
 
