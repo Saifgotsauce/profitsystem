@@ -24,7 +24,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Checkout: SendOwl (via Stripe). Buttons link out to SendOwl checkout; no extra script needed. -->
+<!-- Checkout: Gumroad overlay. gumroad.js upgrades the buy links into an on-page checkout popup. -->
+<script src="https://gumroad.com/js/gumroad.js"></script>
 
 <!-- Vercel Web Analytics (static-site setup) -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -884,17 +885,29 @@ footer a:hover{color:var(--copper)}
 
 <script>
 /* ============================================================
-   SENDOWL CHECKOUT
-   Every "Get instant access" button sends the buyer to your
-   SendOwl checkout. SendOwl charges via Stripe and delivers the
-   files with a secure, expiring download link.
-   ▼▼ EDIT THIS ONE LINE if your SendOwl product URL ever changes ▼▼ */
-const CHECKOUT_URL = "https://transactions.sendowl.com/psp/products/79489162/E4C41EE7/purchase";
+   GUMROAD CHECKOUT (overlay)
+   Every "#order" button opens the Gumroad checkout in a popup
+   ON THIS PAGE — the gumroad.js script in <head> handles it.
+   ?wanted=true sends the buyer straight to the payment form
+   (skips Gumroad's product page, since THIS page is the pitch).
+   Graceful fallback: if the overlay script ever fails to load,
+   the same link still works as a normal link to the Gumroad
+   checkout page, so a buy button can never become a dead end.
+   ▼▼ EDIT THIS ONE LINE — paste your Gumroad product Share URL ▼▼
+   Keep the ?wanted=true on the end. Your permalink looks like
+   "akirvf", so the URL is https://YOURNAME.gumroad.com/l/akirvf */
+const GUMROAD_URL = "https://YOURNAME.gumroad.com/l/akirvf?wanted=true";
 /* ▲▲ ▲▲ */
 
 document.querySelectorAll('a[href="#order"]').forEach(a=>{
-  a.setAttribute('href', CHECKOUT_URL);
+  a.setAttribute('href', GUMROAD_URL);
   a.setAttribute('rel','nofollow');
+  // Fire a GA4 "begin_checkout" so Google/Bing can optimise toward checkout starts
+  a.addEventListener('click', function(){
+    if (typeof gtag === 'function') {
+      gtag('event','begin_checkout',{currency:'USD',value:197,items:[{item_name:'ElectroProfit System'}]});
+    }
+  });
 });
 
 // FAQ accordion
