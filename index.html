@@ -71,8 +71,8 @@ body::before{
     linear-gradient(var(--line) 1px,transparent 1px),
     linear-gradient(90deg,var(--line) 1px,transparent 1px);
   background-size:40px 40px;
-  opacity:.16;
-  mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 75%);
+  opacity:.08;
+  mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 58%);
 }
 body::after{
   content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;mix-blend-mode:multiply;
@@ -180,9 +180,8 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 .hero-cta .btn{width:100%}
 /* hero product mockup */
 .hero-shot{position:relative;margin-top:0}
-.shot-stage{position:relative;width:100%}
-.shot-stage img{width:100%;height:auto;display:block;border-radius:8px;
-  filter:drop-shadow(0 30px 50px rgba(40,28,12,.26))}
+.shot-stage{position:relative;width:100%;filter:drop-shadow(0 30px 50px rgba(40,28,12,.26))}
+.shot-stage img{width:100%;height:auto;display:block;border-radius:8px}
 /* first image sets the height (in normal flow); the rest stack on top and crossfade */
 .shot-stage img:first-child{position:relative;opacity:0}
 .shot-stage .slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
@@ -518,9 +517,9 @@ footer a:hover{color:var(--copper)}
           <!-- first img (invisible) reserves the height; slides crossfade on top -->
           <img src="product-pl-dashboard.png" alt="" aria-hidden="true" width="1794" height="1115">
           <img class="slide on" src="product-pl-dashboard.png" alt="ElectroProfit System — P&amp;L Dashboard" loading="eager" width="1794" height="1115">
-          <img class="slide" src="product-true-hourly-rate.png" alt="ElectroProfit System — True Hourly Rate" loading="lazy" width="1794" height="1115">
-          <img class="slide" src="product-bid-builder.png" alt="ElectroProfit System — Bid Builder" loading="lazy" width="1794" height="1115">
-          <img class="slide" src="product-markup-margin.png" alt="ElectroProfit System — Markup vs Margin" loading="lazy" width="1794" height="1115">
+          <img class="slide" src="product-true-hourly-rate.png" alt="ElectroProfit System — True Hourly Rate" loading="eager" width="1794" height="1115">
+          <img class="slide" src="product-bid-builder.png" alt="ElectroProfit System — Bid Builder" loading="eager" width="1794" height="1115">
+          <img class="slide" src="product-markup-margin.png" alt="ElectroProfit System — Markup vs Margin" loading="eager" width="1794" height="1115">
         </div>
         <div class="shot-dots" id="shotDots" role="tablist" aria-label="Product preview">
           <button class="on" aria-label="Preview 1"></button>
@@ -990,6 +989,7 @@ so.observe(hero);
 </script>
 </body>
 </html>
+
 
 
 
