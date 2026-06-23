@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Checkout: custom on-brand modal that loads the Gumroad checkout in an iframe (see #grModal at end of body). -->
+<!-- Checkout: buy buttons open the Gumroad checkout in a new tab (wired in the script at end of body). -->
 
 <!-- Vercel Web Analytics (static-site setup) -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -161,7 +161,11 @@ nav{position:sticky;top:0;z-index:50;background:rgba(241,234,221,.82);
 
 /* ---------- HERO ---------- */
 .hero{padding:34px 0 50px;position:relative}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1fr;grid-template-areas:"top" "shot" "buy";gap:22px;align-items:center}
+.hero-top{grid-area:top}
+.hero-shot{grid-area:shot}
+.hero-buy{grid-area:buy}
+.hero-buy .priceline{margin-top:0}
 .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 22px}
 .tag{font-family:"IBM Plex Mono";font-size:11.5px;font-weight:500;letter-spacing:.04em;
   background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink-2);
@@ -218,7 +222,8 @@ h1.hero-h em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;hei
 
 @media(min-width:900px){
   .hero{padding:78px 0 64px}
-  .hero-grid{grid-template-columns:1.04fr 1fr;gap:54px}
+  .hero-grid{grid-template-columns:1.04fr 1fr;grid-template-areas:"top shot" "buy shot";column-gap:54px;row-gap:24px;align-items:start}
+  .hero-shot{align-self:center}
   .hero-sub{font-size:20px}
   .hero-cta .btn{width:auto}
 }
@@ -469,26 +474,6 @@ footer a:hover{color:var(--copper)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}*{scroll-behavior:auto}}
 
-/* ---------- ON-BRAND CHECKOUT MODAL ---------- */
-.gr-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
-.gr-modal.open{display:flex}
-.gr-modal-backdrop{position:absolute;inset:0;background:rgba(20,15,7,.6);backdrop-filter:blur(3px);animation:grFade .2s ease}
-.gr-modal-card{position:relative;width:100%;max-width:460px;max-height:92vh;display:flex;flex-direction:column;
-  background:var(--paper);border:1px solid var(--line-2);border-top:4px solid var(--copper);
-  border-radius:var(--r);box-shadow:var(--shadow-lg);overflow:hidden;animation:grPop .22s cubic-bezier(.2,.8,.3,1)}
-.gr-modal-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--card)}
-.gr-modal-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-d);display:inline-flex;align-items:center;gap:8px}
-.gr-modal-title svg{width:14px;height:14px}
-.gr-modal-x{background:none;border:none;cursor:pointer;font-size:24px;line-height:1;color:var(--ink-3);padding:2px 6px;border-radius:7px;transition:background .15s,color .15s}
-.gr-modal-x:hover{background:var(--paper-2);color:var(--ink)}
-.gr-modal-card iframe{width:100%;flex:1;min-height:560px;border:none;background:var(--paper)}
-.gr-modal-foot{padding:9px 16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);text-align:center;border-top:1px solid var(--line);background:var(--card)}
-.gr-modal-foot a{color:var(--copper-d);font-weight:600;text-decoration:none}
-.gr-modal-foot a:hover{text-decoration:underline}
-@keyframes grFade{from{opacity:0}to{opacity:1}}
-@keyframes grPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
-@media(max-width:520px){.gr-modal{padding:0}.gr-modal-card{max-width:100%;max-height:100vh;height:100vh;border-radius:0;border-top-width:4px}.gr-modal-card iframe{min-height:0}}
-@media(prefers-reduced-motion:reduce){.gr-modal-backdrop,.gr-modal-card{animation:none}}
 </style>
 </head>
 <body>
@@ -516,7 +501,7 @@ footer a:hover{color:var(--copper)}
 <section class="hero" id="top">
   <div class="wrap">
     <div class="hero-grid">
-      <div>
+      <div class="hero-top">
         <span class="eyebrow">For solo &amp; 2–5 man electrical shops</span>
         <h1 class="hero-h">You're great with a panel.<br>You're <em>guessing</em> on the price.</h1>
         <div class="tag-row">
@@ -525,7 +510,28 @@ footer a:hover{color:var(--copper)}
           <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg> 20-min setup</span>
         </div>
         <p class="hero-sub">A done-for-you workbook + playbook that hands you your <b>true hourly rate</b>, tells you exactly <b>what to bid</b>, and shows you whether last week's job actually <b>made money</b> — or just kept you busy.</p>
+      </div>
 
+      <!-- product mockup (real screenshot) -->
+      <div class="rv hero-shot">
+        <div class="shot-stage" id="shotStage">
+          <!-- first img (invisible) reserves the height; slides crossfade on top -->
+          <img src="product-pl-dashboard.png" alt="" aria-hidden="true" width="1794" height="1115">
+          <img class="slide on" src="product-pl-dashboard.png" alt="ElectroProfit System — P&amp;L Dashboard" loading="eager" width="1794" height="1115">
+          <img class="slide" src="product-true-hourly-rate.png" alt="ElectroProfit System — True Hourly Rate" loading="lazy" width="1794" height="1115">
+          <img class="slide" src="product-bid-builder.png" alt="ElectroProfit System — Bid Builder" loading="lazy" width="1794" height="1115">
+          <img class="slide" src="product-markup-margin.png" alt="ElectroProfit System — Markup vs Margin" loading="lazy" width="1794" height="1115">
+        </div>
+        <div class="shot-dots" id="shotDots" role="tablist" aria-label="Product preview">
+          <button class="on" aria-label="Preview 1"></button>
+          <button aria-label="Preview 2"></button>
+          <button aria-label="Preview 3"></button>
+          <button aria-label="Preview 4"></button>
+        </div>
+        <span class="shot-cap"><span class="led"></span>A look inside — what the 12 tabs do</span>
+      </div>
+
+      <div class="hero-buy">
         <div class="priceline">
           <span class="was-price"><s>$297</s></span>
           <span class="big"><sup>$</sup>197</span>
@@ -550,25 +556,6 @@ footer a:hover{color:var(--copper)}
           <a href="#order" class="btn btn-primary">Get instant access — $197 <span class="btn-arrow">→</span></a>
           <span class="btn-sub">Instant download · Excel + Google Sheets · 60-day money-back guarantee</span>
         </div>
-      </div>
-
-      <!-- product mockup (real screenshot) -->
-      <div class="rv hero-shot">
-        <div class="shot-stage" id="shotStage">
-          <!-- first img (invisible) reserves the height; slides crossfade on top -->
-          <img src="product-pl-dashboard.png" alt="" aria-hidden="true" width="1794" height="1115">
-          <img class="slide on" src="product-pl-dashboard.png" alt="ElectroProfit System — P&amp;L Dashboard" loading="eager" width="1794" height="1115">
-          <img class="slide" src="product-true-hourly-rate.png" alt="ElectroProfit System — True Hourly Rate" loading="lazy" width="1794" height="1115">
-          <img class="slide" src="product-bid-builder.png" alt="ElectroProfit System — Bid Builder" loading="lazy" width="1794" height="1115">
-          <img class="slide" src="product-markup-margin.png" alt="ElectroProfit System — Markup vs Margin" loading="lazy" width="1794" height="1115">
-        </div>
-        <div class="shot-dots" id="shotDots" role="tablist" aria-label="Product preview">
-          <button class="on" aria-label="Preview 1"></button>
-          <button aria-label="Preview 2"></button>
-          <button aria-label="Preview 3"></button>
-          <button aria-label="Preview 4"></button>
-        </div>
-        <span class="shot-cap"><span class="led"></span>A look inside — what the 12 tabs do</span>
       </div>
     </div>
   </div>
@@ -897,22 +884,6 @@ footer a:hover{color:var(--copper)}
   </div>
 </footer>
 
-<!-- ===================== ON-BRAND CHECKOUT MODAL ===================== -->
-<div class="gr-modal" id="grModal" aria-hidden="true">
-  <div class="gr-modal-backdrop" data-gr-close></div>
-  <div class="gr-modal-card" role="dialog" aria-modal="true" aria-label="Secure checkout">
-    <div class="gr-modal-head">
-      <span class="gr-modal-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Secure checkout
-      </span>
-      <button class="gr-modal-x" data-gr-close aria-label="Close checkout">&times;</button>
-    </div>
-    <iframe id="grFrame" title="ElectroProfit System checkout"></iframe>
-    <div class="gr-modal-foot">Checkout not loading? <a id="grNewTab" href="#" target="_blank" rel="nofollow noopener">Open it in a new tab →</a></div>
-  </div>
-</div>
-
 <!-- sticky mobile CTA -->
 <div class="sticky" id="sticky">
   <div class="sp"><span><s>$297</s> Launch price</span><b><em>$197</em> · pay once</b></div>
@@ -921,52 +892,27 @@ footer a:hover{color:var(--copper)}
 
 <script>
 /* ============================================================
-   GUMROAD CHECKOUT — custom on-brand modal
-   Every "#order" button opens an on-page popup that loads the
-   Gumroad checkout in an iframe. ?wanted=true = straight to the
-   payment form. The popup frame is fully your brand; the form
-   inside is Gumroad's (they don't allow restyling that part).
-   Graceful fallback: each button's href is ALSO set to the
-   checkout URL, so if JS ever fails the click still works.
-   ▼▼ EDIT THIS ONE LINE — paste your Gumroad product Share URL ▼▼
-   Keep the ?wanted=true on the end. Your permalink looks like
-   "akirvf", so the URL is https://YOURNAME.gumroad.com/l/akirvf */
+   GUMROAD CHECKOUT — clean new-tab handoff
+   Every "#order" button opens the Gumroad checkout in a NEW TAB.
+   Why not an on-page popup: Gumroad's checkout is cross-origin and
+   cart-based, so embedding it in an iframe traps the back button
+   and shows a stale empty cart on re-open. A new tab loads fresh
+   every time, keeps EPS open underneath, and never traps the user.
+   ?wanted=true sends the buyer straight to the payment form.
+   ▼▼ EDIT THIS ONE LINE — your Gumroad product Share URL (keep ?wanted=true) ▼▼ */
 const GUMROAD_URL = "https://saiffahad.gumroad.com/l/akirvf?wanted=true";
 /* ▲▲ ▲▲ */
 
-(function(){
-  var modal=document.getElementById('grModal'),
-      frame=document.getElementById('grFrame'),
-      newTab=document.getElementById('grNewTab');
-  if(newTab) newTab.setAttribute('href', GUMROAD_URL);
-
-  function openCheckout(){
-    if(frame && frame.src!==GUMROAD_URL) frame.src=GUMROAD_URL; // load on first open
-    modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
+document.querySelectorAll('a[href="#order"]').forEach(function(a){
+  a.setAttribute('href', GUMROAD_URL);
+  a.setAttribute('target','_blank');
+  a.setAttribute('rel','nofollow noopener');
+  a.addEventListener('click', function(){
     if(typeof gtag==='function'){ // checkout-start signal for Google/Bing Ads
       gtag('event','begin_checkout',{currency:'USD',value:197,items:[{item_name:'ElectroProfit System'}]});
     }
-  }
-  function closeCheckout(){
-    modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  }
-
-  document.querySelectorAll('a[href="#order"]').forEach(function(a){
-    a.setAttribute('href', GUMROAD_URL);   // fallback if JS fails
-    a.setAttribute('rel','nofollow');
-    a.addEventListener('click', function(e){
-      if(!modal) return;                   // no modal -> let the link navigate
-      e.preventDefault(); openCheckout();
-    });
   });
-
-  if(modal){
-    modal.querySelectorAll('[data-gr-close]').forEach(function(el){ el.addEventListener('click', closeCheckout); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) closeCheckout(); });
-  }
-})();
+});
 
 // FAQ accordion
 document.querySelectorAll('.fq').forEach(b=>{
@@ -1044,6 +990,7 @@ so.observe(hero);
 </script>
 </body>
 </html>
+
 
 
 
