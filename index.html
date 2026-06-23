@@ -24,8 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Checkout: Gumroad overlay. gumroad.js upgrades the buy links into an on-page checkout popup. -->
-<script src="https://gumroad.com/js/gumroad.js"></script>
+<!-- Checkout: custom on-brand modal that loads the Gumroad checkout in an iframe (see #grModal at end of body). -->
 
 <!-- Vercel Web Analytics (static-site setup) -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -469,6 +468,27 @@ footer a:hover{color:var(--copper)}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}*{scroll-behavior:auto}}
+
+/* ---------- ON-BRAND CHECKOUT MODAL ---------- */
+.gr-modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.gr-modal.open{display:flex}
+.gr-modal-backdrop{position:absolute;inset:0;background:rgba(20,15,7,.6);backdrop-filter:blur(3px);animation:grFade .2s ease}
+.gr-modal-card{position:relative;width:100%;max-width:460px;max-height:92vh;display:flex;flex-direction:column;
+  background:var(--paper);border:1px solid var(--line-2);border-top:4px solid var(--copper);
+  border-radius:var(--r);box-shadow:var(--shadow-lg);overflow:hidden;animation:grPop .22s cubic-bezier(.2,.8,.3,1)}
+.gr-modal-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--line);background:var(--card)}
+.gr-modal-title{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-d);display:inline-flex;align-items:center;gap:8px}
+.gr-modal-title svg{width:14px;height:14px}
+.gr-modal-x{background:none;border:none;cursor:pointer;font-size:24px;line-height:1;color:var(--ink-3);padding:2px 6px;border-radius:7px;transition:background .15s,color .15s}
+.gr-modal-x:hover{background:var(--paper-2);color:var(--ink)}
+.gr-modal-card iframe{width:100%;flex:1;min-height:560px;border:none;background:var(--paper)}
+.gr-modal-foot{padding:9px 16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);text-align:center;border-top:1px solid var(--line);background:var(--card)}
+.gr-modal-foot a{color:var(--copper-d);font-weight:600;text-decoration:none}
+.gr-modal-foot a:hover{text-decoration:underline}
+@keyframes grFade{from{opacity:0}to{opacity:1}}
+@keyframes grPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:520px){.gr-modal{padding:0}.gr-modal-card{max-width:100%;max-height:100vh;height:100vh;border-radius:0;border-top-width:4px}.gr-modal-card iframe{min-height:0}}
+@media(prefers-reduced-motion:reduce){.gr-modal-backdrop,.gr-modal-card{animation:none}}
 </style>
 </head>
 <body>
@@ -877,6 +897,22 @@ footer a:hover{color:var(--copper)}
   </div>
 </footer>
 
+<!-- ===================== ON-BRAND CHECKOUT MODAL ===================== -->
+<div class="gr-modal" id="grModal" aria-hidden="true">
+  <div class="gr-modal-backdrop" data-gr-close></div>
+  <div class="gr-modal-card" role="dialog" aria-modal="true" aria-label="Secure checkout">
+    <div class="gr-modal-head">
+      <span class="gr-modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secure checkout
+      </span>
+      <button class="gr-modal-x" data-gr-close aria-label="Close checkout">&times;</button>
+    </div>
+    <iframe id="grFrame" title="ElectroProfit System checkout"></iframe>
+    <div class="gr-modal-foot">Checkout not loading? <a id="grNewTab" href="#" target="_blank" rel="nofollow noopener">Open it in a new tab →</a></div>
+  </div>
+</div>
+
 <!-- sticky mobile CTA -->
 <div class="sticky" id="sticky">
   <div class="sp"><span><s>$297</s> Launch price</span><b><em>$197</em> · pay once</b></div>
@@ -885,30 +921,52 @@ footer a:hover{color:var(--copper)}
 
 <script>
 /* ============================================================
-   GUMROAD CHECKOUT (overlay)
-   Every "#order" button opens the Gumroad checkout in a popup
-   ON THIS PAGE — the gumroad.js script in <head> handles it.
-   ?wanted=true sends the buyer straight to the payment form
-   (skips Gumroad's product page, since THIS page is the pitch).
-   Graceful fallback: if the overlay script ever fails to load,
-   the same link still works as a normal link to the Gumroad
-   checkout page, so a buy button can never become a dead end.
+   GUMROAD CHECKOUT — custom on-brand modal
+   Every "#order" button opens an on-page popup that loads the
+   Gumroad checkout in an iframe. ?wanted=true = straight to the
+   payment form. The popup frame is fully your brand; the form
+   inside is Gumroad's (they don't allow restyling that part).
+   Graceful fallback: each button's href is ALSO set to the
+   checkout URL, so if JS ever fails the click still works.
    ▼▼ EDIT THIS ONE LINE — paste your Gumroad product Share URL ▼▼
    Keep the ?wanted=true on the end. Your permalink looks like
    "akirvf", so the URL is https://YOURNAME.gumroad.com/l/akirvf */
-const GUMROAD_URL = "https://YOURNAME.gumroad.com/l/akirvf?wanted=true";
+const GUMROAD_URL = "https://saiffahad.gumroad.com/l/akirvf?wanted=true";
 /* ▲▲ ▲▲ */
 
-document.querySelectorAll('a[href="#order"]').forEach(a=>{
-  a.setAttribute('href', GUMROAD_URL);
-  a.setAttribute('rel','nofollow');
-  // Fire a GA4 "begin_checkout" so Google/Bing can optimise toward checkout starts
-  a.addEventListener('click', function(){
-    if (typeof gtag === 'function') {
+(function(){
+  var modal=document.getElementById('grModal'),
+      frame=document.getElementById('grFrame'),
+      newTab=document.getElementById('grNewTab');
+  if(newTab) newTab.setAttribute('href', GUMROAD_URL);
+
+  function openCheckout(){
+    if(frame && frame.src!==GUMROAD_URL) frame.src=GUMROAD_URL; // load on first open
+    modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    if(typeof gtag==='function'){ // checkout-start signal for Google/Bing Ads
       gtag('event','begin_checkout',{currency:'USD',value:197,items:[{item_name:'ElectroProfit System'}]});
     }
+  }
+  function closeCheckout(){
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('a[href="#order"]').forEach(function(a){
+    a.setAttribute('href', GUMROAD_URL);   // fallback if JS fails
+    a.setAttribute('rel','nofollow');
+    a.addEventListener('click', function(e){
+      if(!modal) return;                   // no modal -> let the link navigate
+      e.preventDefault(); openCheckout();
+    });
   });
-});
+
+  if(modal){
+    modal.querySelectorAll('[data-gr-close]').forEach(function(el){ el.addEventListener('click', closeCheckout); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) closeCheckout(); });
+  }
+})();
 
 // FAQ accordion
 document.querySelectorAll('.fq').forEach(b=>{
@@ -986,6 +1044,7 @@ so.observe(hero);
 </script>
 </body>
 </html>
+
 
 
 
